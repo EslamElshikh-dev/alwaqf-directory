@@ -8,7 +8,7 @@ export type DirectoryRecord = Pick<OriginalRecord, "id" | "name_ar" | "category"
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://alwaqf-directory.vercel.app";
 export const publicRecords: DirectoryRecord[] = master.records.filter(isPublishable).map(({id, name_ar, category, locality, facts, phone_or_code, source_url, confidence, batch_area, neighborhood_canonical}) => ({id, name_ar, category, locality, facts, phone_or_code, source_url, confidence, batch_area, neighborhood_canonical}));
 export const neighborhoods = master.neighborhoods.filter(n => ["confirmed_current", "confirmed_locality", "confirmed_subarea", "map_locality"].includes(n.status)).map(n => ({name: n.name, slug: n.name.replaceAll(" ", "-"), evidence_url: n.evidence_url}));
-export function getNeighborhoodRecords(name: string) { return publicRecords.filter(r => r.neighborhood_canonical === name); }
+export function getNeighborhoodRecords(name: string) { return publicRecords.filter(r => r.neighborhood_canonical === name || r.locality.split(/\s*-\s*/).includes(name)); }
 
 export const areas = [
   { slug: "alwaqf", name: "مدينة الوقف", kicker: "قلب المركز", description: "الخدمات الحكومية، الصحة، التعليم، التجارة والأحياء داخل مدينة الوقف.", accent: "مدينة" },

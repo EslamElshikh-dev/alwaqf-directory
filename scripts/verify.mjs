@@ -21,3 +21,8 @@ for(const f of fs.readdirSync('.next/static/chunks').filter(f=>f.endsWith('.js')
  for(const r of master.records.filter(r=>!isPublishable(r))) assert(!js.includes(r.id),`${r.id} leaked to client bundle`);
 }
 console.log(`PASS: ${ready.length} public records; ${master.records.length-ready.length} excluded from pages, payloads, sitemap and client bundles; strict publication gate; normalized Arabic search.`);
+
+for (const [name, ids] of Object.entries({"عزبة-وشاحي":["WK-045","WK-052"],"رنة-البهايجة":["WK-067","WK-068","WK-069"]})) {
+ const html=fs.readFileSync(`.next/server/app/neighborhoods/${name}.html`,"utf8");
+ for (const id of ids) assert(html.includes(`/place/${id}`),`${id} missing from ${name}`);
+}
