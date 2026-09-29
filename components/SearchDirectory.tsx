@@ -27,9 +27,9 @@ export default function SearchDirectory({ records, compact = false }: Props) {
   return (
     <div className="directory-module">
       <div className="search-panel">
-        <label className="search-box"><SearchIcon /><input type="search" aria-label="ابحث في الدليل" value={query} onChange={e=>setQuery(e.target.value)} placeholder="ابحث باسم نشاط، خدمة، شارع أو حي…" /></label>
-        <select value={category} onChange={e=>setCategory(e.target.value)} aria-label="الفئة">{categories.map(item => <option key={item}>{item}</option>)}</select>
-        <select value={area} onChange={e=>setArea(e.target.value)} aria-label="المنطقة">{areas.map(item => <option key={item}>{item}</option>)}</select>
+        <label className="search-field"><span>ابحث في الدليل</span><span className="field-control"><SearchIcon /><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="اسم نشاط، خدمة، شارع أو حي…" /></span></label>
+        <label className="filter-field"><span>الفئة</span><select value={category} onChange={e=>setCategory(e.target.value)}>{categories.map(item => <option key={item}>{item}</option>)}</select></label>
+        <label className="filter-field"><span>المنطقة</span><select value={area} onChange={e=>setArea(e.target.value)}>{areas.map(item => <option key={item}>{item}</option>)}</select></label>
       </div>
       <div className="results-line" role="status" aria-live="polite"><span><b>{filtered.length}</b> نتيجة مطابقة</span><button className="reset-filters" onClick={() => {setQuery(""); setCategory("الكل"); setArea("الكل");}}>مسح البحث والفلاتر</button></div>
       <div className="records-grid">

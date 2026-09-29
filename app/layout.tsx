@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./design.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
+import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
+import "@fontsource/ibm-plex-sans-arabic/latin-400.css";
+import "@fontsource/ibm-plex-sans-arabic/latin-600.css";
 import JsonLd from "@/components/JsonLd";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
