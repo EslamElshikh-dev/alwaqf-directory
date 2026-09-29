@@ -1,3 +1,4 @@
+/* Editorial design layer over the existing layout primitives in globals.css. */
 :root{--ink:#15342e;--muted:#5c6e66;--paper:#fbfaf6;--card:#fffefa;--green:#166e5f;--green-2:#215c50;--gold:#bb8a48;--line:#d9dfd6;--soft:#e9efe6;--shadow:0 24px 64px rgba(19,48,41,.1)}
 html{scroll-padding-top:120px}
 body{background:var(--paper);font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif}

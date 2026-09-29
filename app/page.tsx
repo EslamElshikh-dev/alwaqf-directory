@@ -39,7 +39,7 @@ export default function Home() {
                     <Link href={`/areas/${area.slug}`} className="route-stop" key={area.slug}>
                       <span className="route-node" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                       <span>{area.name}</span>
-                      <span className="route-count">{areaCounts[area.slug]} موقعًا</span>
+                      <span className="route-count">سجلات: {areaCounts[area.slug]}</span>
                     </Link>
                   ))}
                 </div>
