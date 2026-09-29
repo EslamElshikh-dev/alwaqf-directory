@@ -233,7 +233,7 @@ button,input,select{font:inherit}
   .hero-actions a{flex:1 1 100%}
   .hero-poster{min-height:530px;padding:20px;box-shadow:9px 11px 0 #d7decc}
   .poster-watermark{font-size:270px;top:22%}
-  .poster-scene{left:9px;top:116px;width:42%;opacity:.6}
+  .poster-scene{left:7px;top:90px;width:110px;opacity:.5}
   .poster-content h2{font-size:30px}
   .poster-head,.poster-foot{font-size:10px}
   .route-stop{font-size:13px}
