@@ -47,7 +47,6 @@ export default function SearchDirectory({ records, compact = false }: Props) {
         {visible.map(record => (
           <article className="record-card" key={record.id}>
             <div className="record-top"><span className="category-chip">{record.category}</span><span className="verified"><CheckIcon /> له مصدر</span></div>
-            <span className="record-monogram" aria-hidden="true">{record.category.charAt(0)}</span>
             <h3><Link href={`/place/${record.id}`}>{record.name_ar}</Link></h3>
             <p>{record.facts}</p>
             <div className="record-meta"><span><MapPinIcon />{record.locality}</span>{record.phone_or_code ? <span><PhoneIcon />{record.phone_or_code}</span> : null}</div>

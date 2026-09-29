@@ -29,7 +29,7 @@ button,input,select{font:inherit}
 .poster-head{padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.24);color:#e4ebdc}
 .poster-head span:first-child{font-size:16px;font-weight:700}
 .poster-watermark{position:absolute;left:5%;top:12%;color:rgba(238,215,172,.075);font-size:360px;font-weight:700;line-height:1;pointer-events:none}
-.poster-scene{position:absolute;left:22px;top:105px;width:min(47%,240px);height:auto;opacity:.88;filter:drop-shadow(0 10px 16px rgba(4,30,25,.18));pointer-events:none}
+.poster-scene{position:absolute;left:22px;top:105px;width:min(39%,195px);height:auto;opacity:.88;filter:drop-shadow(0 10px 16px rgba(4,30,25,.18));pointer-events:none}
 .poster-content{position:relative;z-index:1;margin:auto 0;padding-block:22px}
 .poster-kicker{display:inline-flex;align-items:center;gap:7px;color:#e6bd80;font-size:13px;font-weight:700}
 .poster-kicker svg{width:17px}
@@ -114,7 +114,6 @@ button,input,select{font:inherit}
 .records-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .record-card{position:relative;min-width:0;min-height:315px;overflow:hidden;padding:21px;border-color:#e2e6dc;border-radius:17px 17px 17px 3px;background:var(--card);color:var(--ink);overflow-wrap:anywhere}
 .record-card:before{content:"";position:absolute;top:0;right:0;width:62px;height:3px;background:var(--gold)}
-.record-monogram{position:absolute;left:15px;top:44px;color:rgba(31,115,84,.085);font-size:95px;font-weight:700;line-height:1;pointer-events:none}
 .record-card:hover{border-color:#a8c5aa;box-shadow:var(--shadow)}
 .record-top{align-items:start;flex-wrap:wrap}
 .category-chip,.verified{padding:5px 9px;border-radius:30px;line-height:1.5}
