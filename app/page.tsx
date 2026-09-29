@@ -2,12 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SearchDirectory from "@/components/SearchDirectory";
 import PosterScene from "@/components/PosterScene";
+import CategorySymbol from "@/components/CategorySymbol";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
 import { areas, getAreaRecords, neighborhoods, publicRecords } from "@/lib/data";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const areaCounts = Object.fromEntries(areas.map((area) => [area.slug, getAreaRecords(area.slug).length]));
+const featuredPaths = [
+  { category: "صيدلية", kind: "pharmacy", eyebrow: "الصحة اليومية", description: "صيدليات منشورة بمصادرها في قرى ومناطق الوقف." },
+  { category: "سوبرماركت", kind: "market", eyebrow: "احتياجات البيت", description: "أماكن تسوّق محلية تجدها باسمها ومنطقتها." },
+  { category: "تعليم ابتدائي", kind: "school", eyebrow: "التعليم", description: "مدارس ابتدائية لها صفحة ومعلومة قابلة للمراجعة." },
+  { category: "مسجد", kind: "mosque", eyebrow: "معالم وخدمات", description: "مساجد مدرجة بعناوينها المحلية في الدليل." },
+] as const;
 
 export default function Home() {
   const categoriesCount = new Set(publicRecords.map((record) => record.category)).size;
@@ -72,6 +79,25 @@ export default function Home() {
                 <div className="area-bottom"><span><b>{areaCounts[area.slug]}</b> سجل جاهز</span><span className="circle-arrow" aria-hidden="true">↙</span></div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section paths-section" aria-labelledby="paths-title">
+        <div className="shell">
+          <div className="paths-heading"><div><span className="section-kicker">اختصار الطريق</span><h2 id="paths-title">ابدأ من<br /><em>احتياجك اليوم.</em></h2></div><p>أربع بدايات سريعة من فئات موجودة في الدليل. اختر واحدة، ثم ابحث داخل نتائجها عن الاسم أو المنطقة التي تريدها.</p></div>
+          <div className="path-grid">
+            {featuredPaths.map((path, index) => {
+              const count = publicRecords.filter((record) => record.category === path.category).length;
+              return <Link href={`/directory?category=${encodeURIComponent(path.category)}`} className={`path-card path-${path.kind}`} key={path.category}>
+                <span className="path-index">مسار / 0{index + 1}</span>
+                <span className="path-symbol"><CategorySymbol kind={path.kind} /></span>
+                <span className="path-eyebrow">{path.eyebrow}</span>
+                <h3>{path.category}</h3>
+                <p className="path-description">{path.description}</p>
+                <span className="path-bottom"><span><b>{count}</b> سجل منشور</span><span className="path-arrow" aria-hidden="true">↙</span></span>
+              </Link>;
+            })}
           </div>
         </div>
       </section>

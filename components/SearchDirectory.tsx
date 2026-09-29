@@ -1,7 +1,7 @@
 "use client";
 
 import { normalizeSearch } from "@/lib/search";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { CheckIcon, MapPinIcon, PhoneIcon, SearchIcon } from "@/components/Icons";
 import type { DirectoryRecord } from "@/lib/data";
@@ -15,6 +15,15 @@ export default function SearchDirectory({ records, compact = false }: Props) {
 
   const categories = useMemo(() => ["الكل", ...Array.from(new Set(records.map(r => r.category))).sort((a,b)=>a.localeCompare(b,"ar"))], [records]);
   const areas = useMemo(() => ["الكل", ...Array.from(new Set(records.map(r => r.batch_area || r.locality))).sort((a,b)=>String(a).localeCompare(String(b),"ar"))], [records]);
+  useEffect(() => {
+    if (compact) return;
+    const params = new URLSearchParams(window.location.search);
+    const selectedCategory = params.get("category");
+    const selectedArea = params.get("area");
+    if (selectedCategory && categories.includes(selectedCategory)) setCategory(selectedCategory);
+    if (selectedArea && areas.includes(selectedArea)) setArea(selectedArea);
+    setQuery(params.get("q")?.slice(0, 120) || "");
+  }, [compact, categories, areas]);
   const quickCategories = useMemo(() => {
     const counts = new Map<string, number>();
     for (const record of records) counts.set(record.category, (counts.get(record.category) || 0) + 1);
@@ -33,6 +42,11 @@ export default function SearchDirectory({ records, compact = false }: Props) {
   }, [records, query, category, area]);
 
   const visible = compact ? filtered.slice(0, 8) : filtered;
+  const fullParams = new URLSearchParams();
+  if (query.trim()) fullParams.set("q", query.trim());
+  if (category !== "الكل") fullParams.set("category", category);
+  if (area !== "الكل") fullParams.set("area", area);
+  const fullHref = fullParams.size ? `/directory?${fullParams}` : "/directory";
 
   return (
     <div className="directory-module">
@@ -54,7 +68,7 @@ export default function SearchDirectory({ records, compact = false }: Props) {
           </article>
         ))}
       </div>
-      {compact && filtered.length > 8 ? <div className="center-action"><Link href="/directory" className="primary-button">افتح الدليل الكامل <span aria-hidden="true">↙</span></Link></div> : null}
+      {compact && filtered.length > 0 ? <div className="center-action"><Link href={fullHref} className="primary-button">افتح الدليل الكامل <span aria-hidden="true">↙</span></Link></div> : null}
       {!visible.length ? <div className="empty-state"><SearchIcon /><h3>ما لقيناش نتيجة مطابقة</h3><p>جرّب اسمًا أقصر أو اختر فئة أو منطقة مختلفة.</p></div> : null}
     </div>
   );
