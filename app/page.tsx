@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SearchDirectory from "@/components/SearchDirectory";
+import PosterScene from "@/components/PosterScene";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
 import { areas, getAreaRecords, neighborhoods, publicRecords } from "@/lib/data";
 
@@ -31,6 +32,7 @@ export default function Home() {
               <div className="poster-grid" aria-hidden="true" />
               <div className="poster-head"><span>دليل الوقف</span><span>قنا · مصر / ٠١</span></div>
               <div className="poster-watermark" aria-hidden="true">و</div>
+              <PosterScene />
               <div className="poster-content">
                 <span className="poster-kicker"><MapPinIcon /> من المدينة إلى القرية</span>
                 <h2>كل مكان<br />له حكاية وعنوان.</h2>
