@@ -3,6 +3,7 @@ import Link from "next/link";
 import SearchDirectory from "@/components/SearchDirectory";
 import PosterScene from "@/components/PosterScene";
 import CategorySymbol from "@/components/CategorySymbol";
+import BrandMark from "@/components/BrandMark";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
 import { areas, getAreaRecords, getNeighborhoodRecords, neighborhoods, publicRecords } from "@/lib/data";
 
@@ -38,8 +39,8 @@ export default function Home() {
 
             <div className="hero-poster">
               <div className="poster-grid" aria-hidden="true" />
-              <div className="poster-head"><span>دليل الوقف</span><span>قنا · مصر / ٠١</span></div>
-              <div className="poster-watermark" aria-hidden="true">و</div>
+              <div className="poster-head"><span className="poster-head-brand"><BrandMark className="poster-mini-mark" /> دليل الوقف</span><span>قنا · مصر / ٠١</span></div>
+              <div className="poster-watermark" aria-hidden="true" />
               <PosterScene />
               <div className="poster-content">
                 <span className="poster-kicker"><MapPinIcon /> من المدينة إلى القرية</span>

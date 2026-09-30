@@ -1,1 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d6b5e"/><stop offset="1" stop-color="#132d2a"/></linearGradient></defs><rect width="128" height="128" rx="34" fill="url(#g)"/><path d="M33 40c0 20 6 48 31 48s31-28 31-48" fill="none" stroke="#f5d28b" stroke-width="13" stroke-linecap="round"/><circle cx="64" cy="84" r="12" fill="#fff8e8"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="edge" x1="26" y1="17" x2="139" y2="141" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF0C5"/><stop offset=".24" stop-color="#D5A761"/><stop offset=".61" stop-color="#896033"/><stop offset="1" stop-color="#E7C284"/>
+    </linearGradient>
+    <linearGradient id="face" x1="31" y1="22" x2="124" y2="137" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#389A7E"/><stop offset=".43" stop-color="#176B59"/><stop offset="1" stop-color="#0C3A32"/>
+    </linearGradient>
+    <linearGradient id="arch" x1="54" y1="37" x2="104" y2="99" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF5D8"/><stop offset=".48" stop-color="#DCC392"/><stop offset="1" stop-color="#A87C49"/>
+    </linearGradient>
+    <linearGradient id="river" x1="40" y1="91" x2="123" y2="119" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E6F8E8"/><stop offset=".5" stop-color="#98D7BC"/><stop offset="1" stop-color="#D8EECF"/>
+    </linearGradient>
+    <clipPath id="inside"><path d="M80 18c-30 0-52 21-52 51 0 31 28 55 52 72 24-17 52-41 52-72 0-30-22-51-52-51Z"/></clipPath>
+  </defs>
+  <ellipse cx="83" cy="150" rx="43" ry="6" fill="#0D3029" opacity=".16"/>
+  <path d="M80 11c-35 0-60 24-60 59 0 38 37 66 60 82 23-16 60-44 60-82 0-35-25-59-60-59Z" fill="#082A26" transform="translate(5 4)"/>
+  <path d="M80 9c-35 0-60 24-60 59 0 38 37 66 60 82 23-16 60-44 60-82 0-35-25-59-60-59Z" fill="url(#edge)"/>
+  <path d="M80 18c-30 0-52 21-52 51 0 31 28 55 52 72 24-17 52-41 52-72 0-30-22-51-52-51Z" fill="url(#face)"/>
+  <g clip-path="url(#inside)">
+    <path d="M25 109c25-28 49-16 63-6 18 13 35 9 51-9v56H20v-41Z" fill="#0D4E42" opacity=".57"/>
+    <path d="M31 118c23-18 43-15 57-4 15 12 33 6 49-8" stroke="#47A28B" stroke-width="18" opacity=".43"/>
+    <path d="M36 105c19-18 35-21 51-8 17 13 30 15 47-1" stroke="#06392F" stroke-width="11" opacity=".38"/>
+    <path d="M35 101c19-18 36-19 51-7 17 13 32 12 49-4" stroke="url(#river)" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M36 112c19-18 36-18 50-7 18 14 31 13 48-3" stroke="#CDEDD5" stroke-width="1" opacity=".7"/>
+    <circle cx="47" cy="93" r="3.7" fill="#F6D698" stroke="#0F5749" stroke-width="1.7"/>
+    <circle cx="116" cy="102" r="3.7" fill="#F6D698" stroke="#0F5749" stroke-width="1.7"/>
+  </g>
+  <path d="M53 88V67c0-20 11-33 27-33s27 13 27 33v21l-10 8H63L53 88Z" fill="#082F2B" opacity=".65" transform="translate(4 4)"/>
+  <path d="M53 88V67c0-20 11-33 27-33s27 13 27 33v21l-10 8H63L53 88Z" fill="url(#arch)"/>
+  <path d="M62 87V66c0-14 8-23 18-23s18 9 18 23v21l-6 5H68l-6-5Z" fill="#0F5347"/>
+  <path d="M69 83V66c0-9 4-15 11-15s11 6 11 15v17l-5 4H74l-5-4Z" fill="#092D2B"/>
+  <path d="M57 67c0-17 10-29 23-29 12 0 21 10 23 25" stroke="#FFFBE7" stroke-width="2" stroke-linecap="round" opacity=".73"/>
+  <path d="M72 88h16" stroke="#F5DBA6" stroke-width="2" stroke-linecap="round"/>
+  <path d="M31 59c3-22 20-39 44-42" stroke="#FFF5CB" stroke-width="2.5" stroke-linecap="round" opacity=".68"/>
+  <path d="M117 32c9 8 14 20 14 34" stroke="#BCE3C6" stroke-width="1.7" stroke-linecap="round" opacity=".58"/>
+</svg>
