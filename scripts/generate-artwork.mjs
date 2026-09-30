@@ -41,6 +41,51 @@ const symbols = {
   herbs: '<path d="M60 101V28m0 30C37 30 24 40 27 55c12 12 25 13 33 3Zm0 16c18-28 33-24 37-8-8 15-25 22-37 8ZM47 101h26"/>',
 };
 
+// The larger families receive distinct subjects, not just a recolored copy.
+const subjects = {
+  pharmacy: [
+    symbols.pharmacy,
+    '<path d="m37 31 46 46a18 18 0 0 1-25 25L12 56a18 18 0 0 1 25-25ZM25 68l26-26M69 37l24 24"/>',
+    '<rect x="29" y="38" width="62" height="62" rx="10"/><path d="M40 38V23h40v15M60 52v35M45 69h30"/>',
+    '<path d="M28 93h64M44 36h32l-5 16H49zM49 52h22v41H49zM54 27h12M55 77h10"/><circle cx="60" cy="64" r="5"/>',
+    '<path d="M30 84c2 16 13 24 30 24s28-8 30-24H30ZM37 84h46M70 18 45 60m19-39 12 13M47 59l-7 10"/>',
+    '<rect x="22" y="34" width="76" height="65" rx="9"/><path d="M48 34V23h24v11M60 48v37M42 66h36"/>',
+    '<rect x="27" y="24" width="66" height="79" rx="8"/><circle cx="46" cy="45" r="7"/><circle cx="72" cy="45" r="7"/><circle cx="46" cy="71" r="7"/><circle cx="72" cy="71" r="7"/>',
+    '<path d="M38 38h44v64H38zM46 38V25h28v13M60 58c-9 11-13 19-13 26a13 13 0 0 0 26 0c0-7-4-15-13-26Z"/>',
+    '<path d="M33 20h54v82H33zM42 35h36M42 47h23M42 59h15M60 73v21M49 84h22"/>',
+    '<path d="M55 20h10v45H55zM49 65h22v25a11 11 0 0 1-22 0V65ZM45 98h30M37 38h18M65 38h18"/>',
+  ],
+  market: [
+    symbols.market,
+    '<path d="M25 52h70l-8 50H33zM33 52l9-22h36l9 22M43 69h34"/><circle cx="48" cy="80" r="7"/><circle cx="72" cy="83" r="8"/>',
+    '<path d="M30 35h60l7 63H23zM42 35c0-25 36-25 36 0M42 58h36M48 75h24"/>',
+    '<path d="M22 36h76v19H22zM29 55v44h62V55M42 36v19m18-19v19m18-19v19M44 99V70h32v29"/>',
+    '<path d="M22 97h76M60 25v72M30 48h60M32 49l-12 28h24L32 49Zm56 0L76 77h24L88 49Z"/>',
+    '<path d="M21 35h14l10 48h49M48 83h43M56 96a5 5 0 1 0 10 0m18 0a5 5 0 1 0 10 0M45 47h47l-6 28H51"/>',
+    '<path d="M25 88h70M31 88V47h58v41M35 47l10-21h30l10 21M41 61h38M43 75h12m10 0h12"/>',
+    '<path d="M26 93h68M34 93V38h52v55M42 38V27h36v11M43 57h34M43 73h34"/><circle cx="51" cy="64" r="4"/><circle cx="69" cy="80" r="4"/>',
+    '<path d="M22 95h76M35 95V54h50v41M44 54V32h32v22M43 69h34M50 83h20"/>',
+    '<path d="M20 95h80M29 95V46h62v49M25 46l9-19h52l9 19M39 61h12v17H39zm30 0h12v17H69z"/>',
+  ],
+  school: [
+    symbols.school, symbols.library,
+    '<path d="M28 95 47 28l12 3-19 67ZM47 28l6-13 6 16M57 95l19-67 12 3-19 67ZM76 28l6-13 6 16"/>',
+    '<path d="M20 76h80M27 76V39h66v37M37 95V77m46 18V77M39 49h42M48 61h24"/>',
+    '<path d="M20 25h80v60H20zM28 91h64M60 85v13M35 42h49M35 55h31M35 68h40"/>',
+    '<path d="M32 42a28 28 0 0 1 56 0v57H32V42Zm0 16h56M48 72h24M45 99v-9m30 9v-9"/>',
+    '<path d="M22 95h76M30 82 60 26l30 56H30Zm30-56v56M40 78h40"/>',
+    '<rect x="33" y="22" width="54" height="78" rx="5"/><path d="M43 22v78M50 38h27M50 53h20M50 68h27"/>',
+  ],
+  mosque: [
+    symbols.mosque,
+    '<path d="M22 97h76M35 97V52c0-16 16-24 25-32 9 8 25 16 25 32v45M49 97V69a11 11 0 0 1 22 0v28M16 97V25m88 72V25"/>',
+    '<path d="M22 96V56h76v40M22 56c8-20 23-31 38-42 15 11 30 22 38 42M44 96V73a16 16 0 0 1 32 0v23M16 96h88"/>',
+    '<path d="M19 98h82M29 98V45h62v53M37 45C42 31 51 26 60 18c9 8 18 13 23 27M49 98V72a11 11 0 0 1 22 0v26"/>',
+    '<path d="M18 95h84M32 95V48h56v47M36 48q24-38 48 0M47 95V68q13-20 26 0v27M12 95V25m96 70V25"/>',
+    '<path d="M24 97h72M29 97V48h62v49M29 48 60 25l31 23M46 62h28M60 62v35M13 97V30m94 67V30"/>',
+  ],
+};
+
 function kind(category) {
   if (/صيدلية/.test(category)) return 'pharmacy';
   if (/أسنان/.test(category)) return 'dental';
@@ -91,7 +136,7 @@ const palettes = [
   ['#e2ebef', '#b3ced1', '#356b78', '#b58d54'],
 ];
 
-function artwork(record) {
+function artwork(record, ordinal) {
   const seed = hash(`${record.id}:${record.name_ar}:${record.category}`);
   const [paper, pale, ink, gold] = palettes[seed % palettes.length];
   const theme = kind(record.category);
@@ -113,6 +158,7 @@ function artwork(record) {
   const shape = variant === 0 || variant === 3
     ? `<rect x="${x-102}" y="${y-105}" width="204" height="204" rx="48" fill="${paper}" transform="rotate(-8 ${x} ${y})" filter="url(#shadow)"/>`
     : `<circle cx="${x}" cy="${y}" r="108" fill="${paper}" filter="url(#shadow)"/>`;
+  const subject = subjects[theme]?.[ordinal % subjects[theme].length] || symbols[theme];
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="600" height="340">
 <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="${paper}"/><stop offset="1" stop-color="${pale}"/></linearGradient><filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="13" stdDeviation="15" flood-color="${ink}" flood-opacity=".14"/></filter></defs>
 <rect width="600" height="340" fill="url(#bg)"/>${stripes}
@@ -121,15 +167,19 @@ function artwork(record) {
 ${landscape}${houses}${wheel}
 <path d="M35 246v-61m0 12c-17-21-28-14-34-5m34 5c8-22 22-24 32-17m-32 17c18-8 30-5 36 5" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linecap="round" opacity=".31"/>
 ${shape}<circle cx="${x}" cy="${y}" r="87" fill="none" stroke="${gold}" stroke-width="1.7" opacity=".55"/>
-<g transform="translate(${x-84} ${y-84}) scale(1.4)" fill="none" stroke="${ink}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${symbols[theme]}</g>
+<g transform="translate(${x-84} ${y-84}) scale(1.4)" fill="none" stroke="${ink}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${subject}</g>
 <path d="M22 28h75" stroke="${ink}" stroke-width="2" opacity=".36"/><circle cx="110" cy="28" r="4" fill="${gold}"/>
 <path d="M22 315h556" stroke="${ink}" stroke-width="1" opacity=".24"/><text x="24" y="304" font-family="Arial,sans-serif" font-size="12" letter-spacing="2" fill="${ink}" opacity=".75">${record.id}</text>
 <circle cx="550" cy="304" r="9" fill="none" stroke="${ink}" opacity=".45"/><circle cx="550" cy="304" r="3" fill="${gold}"/>
 </svg>`;
 }
 
+const themeCount = new Map();
 for (const record of records) {
   if (!/^[A-Z]{2}-\d+$/.test(record.id)) throw new Error(`Unexpected record id: ${record.id}`);
-  fs.writeFileSync(path.join(output, `${record.id}.svg`), artwork(record));
+  const theme = kind(record.category);
+  const ordinal = themeCount.get(theme) || 0;
+  themeCount.set(theme, ordinal + 1);
+  fs.writeFileSync(path.join(output, `${record.id}.svg`), artwork(record, ordinal));
 }
 console.log(`Generated ${records.length} distinct editorial SVGs in ${output}`);
