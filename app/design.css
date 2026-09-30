@@ -408,3 +408,75 @@ button,input,select{font:inherit}
   html{scroll-behavior:auto}
   *,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* An original visual atlas: illustrative imagery is distinct from source evidence. */
+.hero-poster{min-height:675px;background:#123d34}
+.poster-photo{position:absolute;inset:0 0 auto;z-index:0;height:300px;overflow:hidden;background:#254c3e}
+.poster-photo img{object-fit:cover;object-position:center 48%}
+.poster-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,42,34,.43) 0%,rgba(11,49,41,.02) 42%,#123d34 100%)}
+.poster-photo>span{position:absolute;z-index:1;left:28px;bottom:39px;color:#e8e5d2;font-size:10px;font-weight:700;text-shadow:0 2px 12px #103a31}
+.poster-head,.poster-content,.poster-foot{position:relative;z-index:2}
+.poster-head{border-bottom-color:rgba(255,255,255,.34);text-shadow:0 2px 12px rgba(5,25,22,.6)}
+.poster-content{margin:230px 0 auto;padding:0 0 20px}
+.poster-content h2{margin-bottom:17px}
+.poster-watermark{z-index:0;top:47%;opacity:.055}
+.poster-foot{margin-top:auto}
+
+.path-card{min-height:360px;padding:0}
+.path-image{position:relative;display:block;height:177px;flex:none;overflow:hidden;background:#cdd9cc}
+.path-image img{object-fit:cover;transition:transform .5s ease}
+.path-card:hover .path-image img{transform:scale(1.06)}
+.path-image:after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,rgba(9,41,34,.52))}
+.path-image>span{position:absolute;z-index:1;right:14px;bottom:11px;color:#fff;font-size:10px;font-weight:700;text-shadow:0 1px 5px #19352d}
+.path-index{position:absolute;top:13px;right:14px;z-index:2;padding:5px 9px;border:1px solid rgba(255,255,255,.7);border-radius:20px;background:rgba(250,250,245,.9);color:#173d34;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.path-symbol{top:143px;left:18px;z-index:2;display:grid;place-items:center;width:58px;height:58px;padding:9px;border:3px solid #f5f3e9;border-radius:17px 17px 17px 4px;background:#e7eee7;opacity:1;transform:rotate(-7deg);box-shadow:0 8px 15px rgba(26,58,42,.15)}
+.path-card:hover .path-symbol{transform:rotate(0) translateY(-3px)}
+.path-eyebrow{margin:30px 21px 0}
+.path-card h3{margin-inline:21px;font-size:25px}
+.path-description{min-height:0;margin:2px 21px 12px}
+.path-bottom{margin:auto 21px 18px}
+
+.record-card{min-height:405px;padding:0;border-radius:18px 18px 18px 4px;content-visibility:auto;contain-intrinsic-size:405px}
+.record-card:before{display:none}
+.record-art{position:relative;display:block;aspect-ratio:600/340;overflow:hidden;background:#e8eee5}
+.record-art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.record-card:hover .record-art img{transform:scale(1.035)}
+.record-art>span{position:absolute;left:10px;bottom:10px;padding:3px 8px;border:1px solid rgba(255,255,255,.6);border-radius:20px;background:rgba(255,255,255,.85);color:#365b4d;font-size:10px;font-weight:700;backdrop-filter:blur(5px)}
+.record-body{display:flex;flex:1;flex-direction:column;min-width:0;padding:17px 19px 19px}
+.record-card h3{margin:13px 0 7px;font-size:18px}
+.record-card p{margin:0 0 14px;-webkit-line-clamp:2}
+.record-meta{margin-top:auto;padding-top:12px}
+.record-body>.text-link{justify-content:space-between;margin-top:12px}
+
+.detail-card{padding:26px 34px 38px}
+.detail-art{position:relative;height:290px;margin:4px 0 28px;overflow:hidden;border:1px solid #d6e3d7;border-radius:17px 17px 17px 3px;background:#e9efe7}
+.detail-art img{display:block;width:100%;height:100%;object-fit:cover}
+.detail-art>span{position:absolute;left:14px;bottom:14px;padding:6px 11px;border-radius:20px;background:rgba(251,250,246,.91);color:#365e4e;font-size:11px;font-weight:700}
+.detail-card h1{margin-top:19px}
+.related-card{min-height:290px;padding:0}
+.related-art{display:block;width:100%;aspect-ratio:600/340;overflow:hidden;background:#e6eee6}
+.related-art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.related-card:hover .related-art img{transform:scale(1.045)}
+.related-category{margin:14px 17px 0}
+.related-card strong{margin:10px 17px 20px;font-size:17px}
+.related-place{margin:0 17px 19px}
+.related-arrow{left:17px;bottom:14px}
+
+@media(max-width:1050px){
+  .path-card{min-height:370px}
+  .record-card{min-height:400px}
+}
+@media(max-width:600px){
+  .hero-poster{min-height:628px}
+  .poster-photo{height:260px}
+  .poster-photo>span{left:18px;bottom:32px;font-size:9px}
+  .poster-content{margin-top:194px}
+  .poster-content h2{margin-bottom:12px}
+  .path-card{min-height:345px}
+  .path-image{height:168px}
+  .path-symbol{top:135px}
+  .record-card{min-height:0;contain-intrinsic-size:420px}
+  .detail-card{padding:17px 18px 28px}
+  .detail-art{height:220px;margin-bottom:22px}
+  .related-card{min-height:0}
+}

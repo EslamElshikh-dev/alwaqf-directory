@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import JsonLd from "@/components/JsonLd";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -56,6 +57,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
         </nav>
 
         <article className="detail-card">
+          <div className="detail-art"><Image src={`/places/${record.id}.svg`} width={600} height={340} alt={`رسم تعبيري مخصص لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, 900px" /><span>رسم توضيحي للنشاط · ليس صورة للمكان</span></div>
           <div className="record-top"><span className="category-chip">{record.category}</span><span className="verified"><CheckIcon /> {statusLabel(record.confidence)}</span></div>
           <h1>{record.name_ar}</h1>
           <p className="detail-lead">{record.facts}</p>
@@ -72,6 +74,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
         {related.length ? <section className="related-section" aria-labelledby="related-title">
           <div className="related-heading"><div><span className="section-kicker">تابع الاستكشاف</span><h2 id="related-title">المزيد في {record.batch_area}</h2></div>{area ? <Link href={`/areas/${area.slug}`} className="text-link large">عرض صفحة المنطقة <span aria-hidden="true">↙</span></Link> : null}</div>
           <div className="related-grid">{related.map((item) => <Link href={`/place/${item.id}`} className="related-card" key={item.id}>
+            <span className="related-art"><Image src={`/places/${item.id}.svg`} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, 33vw" /></span>
             <span className="related-category">{item.category}</span>
             <strong>{item.name_ar}</strong>
             <span className="related-place"><MapPinIcon /> {item.locality}</span>

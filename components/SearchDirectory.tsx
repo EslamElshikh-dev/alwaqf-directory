@@ -3,6 +3,7 @@
 import { normalizeSearch } from "@/lib/search";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckIcon, MapPinIcon, PhoneIcon, SearchIcon } from "@/components/Icons";
 import type { DirectoryRecord } from "@/lib/data";
 
@@ -60,11 +61,14 @@ export default function SearchDirectory({ records, compact = false }: Props) {
       <div className="records-grid">
         {visible.map(record => (
           <article className="record-card" key={record.id}>
-            <div className="record-top"><span className="category-chip">{record.category}</span><span className="verified"><CheckIcon /> له مصدر</span></div>
-            <h3><Link href={`/place/${record.id}`}>{record.name_ar}</Link></h3>
-            <p>{record.facts}</p>
-            <div className="record-meta"><span><MapPinIcon />{record.locality}</span>{record.phone_or_code ? <span><PhoneIcon />{record.phone_or_code}</span> : null}</div>
-            <Link className="text-link" href={`/place/${record.id}`}>عرض التفاصيل <span>←</span></Link>
+            <Link href={`/place/${record.id}`} className="record-art" aria-label={`عرض ${record.name_ar}`}><Image src={`/places/${record.id}.svg`} width={600} height={340} alt={`رسم تعبيري لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, (max-width: 820px) 50vw, 25vw" /><span>رسم تعبيري</span></Link>
+            <div className="record-body">
+              <div className="record-top"><span className="category-chip">{record.category}</span><span className="verified"><CheckIcon /> له مصدر</span></div>
+              <h3><Link href={`/place/${record.id}`}>{record.name_ar}</Link></h3>
+              <p>{record.facts}</p>
+              <div className="record-meta"><span><MapPinIcon />{record.locality}</span>{record.phone_or_code ? <span><PhoneIcon />{record.phone_or_code}</span> : null}</div>
+              <Link className="text-link" href={`/place/${record.id}`}>عرض التفاصيل <span aria-hidden="true">←</span></Link>
+            </div>
           </article>
         ))}
       </div>

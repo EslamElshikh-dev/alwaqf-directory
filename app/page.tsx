@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SearchDirectory from "@/components/SearchDirectory";
-import PosterScene from "@/components/PosterScene";
 import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
 import AreaScene from "@/components/AreaScene";
@@ -40,9 +40,9 @@ export default function Home() {
 
             <div className="hero-poster">
               <div className="poster-grid" aria-hidden="true" />
+              <div className="poster-photo"><Image src="/images/waqf-landscape.webp" alt="تصور فني مستوحى من بيئة مركز الوقف: النيل والحقول والعمران المحلي" fill priority sizes="(max-width: 960px) 100vw, 48vw" /><span>تصور فني مستوحى من بيئة الوقف</span></div>
               <div className="poster-head"><span className="poster-head-brand"><BrandMark className="poster-mini-mark" /> دليل الوقف</span><span>قنا · مصر / ٠١</span></div>
               <div className="poster-watermark" aria-hidden="true" />
-              <PosterScene />
               <div className="poster-content">
                 <span className="poster-kicker"><MapPinIcon /> من المدينة إلى القرية</span>
                 <h2>كل مكان<br />له حكاية وعنوان.</h2>
@@ -93,6 +93,7 @@ export default function Home() {
             {featuredPaths.map((path, index) => {
               const count = publicRecords.filter((record) => record.category === path.category).length;
               return <Link href={`/directory?category=${encodeURIComponent(path.category)}`} className={`path-card path-${path.kind}`} key={path.category}>
+                <span className="path-image"><Image src={`/images/category-${path.kind}.webp`} alt={`صورة تعبيرية لفئة ${path.category}`} fill sizes="(max-width: 600px) 82vw, (max-width: 960px) 45vw, 25vw" /><span>صورة تعبيرية</span></span>
                 <span className="path-index">مسار / 0{index + 1}</span>
                 <span className="path-symbol"><CategorySymbol kind={path.kind} /></span>
                 <span className="path-eyebrow">{path.eyebrow}</span>
