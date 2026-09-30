@@ -461,6 +461,8 @@ button,input,select{font:inherit}
 .related-card strong{margin:10px 17px 20px;font-size:17px}
 .related-place{margin:0 17px 19px}
 .related-arrow{left:17px;bottom:14px}
+.page-hero{display:flex;flex-direction:column;justify-content:center;max-width:none;min-height:320px}
+.page-hero h1,.page-hero p{max-width:800px}
 
 @media(max-width:1050px){
   .path-card{min-height:370px}
@@ -479,4 +481,5 @@ button,input,select{font:inherit}
   .detail-card{padding:17px 18px 28px}
   .detail-art{height:220px;margin-bottom:22px}
   .related-card{min-height:0}
+  .page-hero{min-height:0}
 }
