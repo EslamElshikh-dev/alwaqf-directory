@@ -1,3 +1,28 @@
 import type { Metadata } from "next";
-export const metadata: Metadata = { title: "عن دليل الوقف", description: "منهج جمع ومراجعة ونشر بيانات دليل الوقف.", alternates: { canonical: "/about" } };
-export default function AboutPage(){return <section className="page-shell"><div className="shell prose-page"><span className="section-kicker">عن المشروع</span><h1>دليل محلي مبني على التحقق، مش تجميع أسماء وخلاص.</h1><p>دليل الوقف مشروع رقمي لتنظيم الخدمات والأنشطة والمعالم داخل مركز الوقف بمحافظة قنا. الفكرة الأساسية هي تقديم بيانات عملية يمكن الرجوع إلى مصدرها، مع عدم نشر السجلات المتعارضة أو القديمة قبل حسمها.</p><h2>منهج العمل</h2><p>كل سجل يمر بمراحل جمع، تطبيع للاسم والمكان، إزالة التكرار، تقييم للمصدر، ثم تحديد حالة النشر. الأحياء والتجمعات المحلية تُعامل بنفس المنهج حتى لا تُنشأ صفحات مكررة بسبب اختلاف التهجئة.</p><div className="principles"><div><b>مصدر واضح</b><span>كل معلومة مهمة مرتبطة بمرجع قابل للمراجعة.</span></div><div><b>لا تخمين</b><span>لو الحي أو الهاتف غير محسوم، يظل داخل قائمة البحث ولا يظهر كحقيقة.</span></div><div><b>قابل للتوسع</b><span>الهيكل جاهز لإضافة قرى وأحياء وأنشطة جديدة بدون كسر البيانات القديمة.</span></div></div></div></section>}
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "عن دليل الوقف",
+  description: "منهج جمع ومراجعة ونشر بيانات دليل الوقف.",
+  alternates: { canonical: "/about" },
+};
+
+export default function AboutPage() {
+  return <section className="page-shell about-page"><div className="shell prose-page">
+    <div className="about-head">
+      <span className="section-kicker">عن المشروع / دليل الوقف</span>
+      <h1>المكان يبدأ<br /><em>من معلومة دقيقة.</em></h1>
+      <p>دليل الوقف مشروع رقمي لتنظيم الخدمات والأنشطة والمعالم داخل مركز الوقف بمحافظة قنا. نقدم بيانات عملية يمكن الرجوع إلى مصدرها، ونؤجل نشر السجلات المتعارضة أو القديمة حتى تُحسم.</p>
+      <span className="about-head-note">الوقف، قنا <span aria-hidden="true">✦</span> دليل يتوسع مع التحقق</span>
+    </div>
+    <div className="about-body">
+      <div className="about-section-head"><div><span className="section-kicker">المنهج</span><h2>من المعلومة إلى الصفحة.</h2></div><p>يمر كل سجل بمراحل جمع، وتطبيع للاسم والمكان، وإزالة للتكرار، وتقييم للمصدر، ثم تحديد حالة النشر. الأحياء والتجمعات المحلية تُراجع بالمنهج نفسه حتى لا تتكرر بسبب اختلاف التهجئة.</p></div>
+      <div className="principles">
+        <div><span className="principle-number">01</span><b>مصدر واضح</b><span>نضع مرجع السجل في متناول من يريد مراجعة التفاصيل.</span></div>
+        <div><span className="principle-number">02</span><b>لا تخمين</b><span>إذا تعارضت المعلومة أو لم يكتمل التحقق، تبقى خارج الدليل العام حتى تُحسم.</span></div>
+        <div><span className="principle-number">03</span><b>قابل للتوسع</b><span>يمكن إضافة قرى وأحياء وأنشطة جديدة مع الحفاظ على السجلات الأصلية.</span></div>
+      </div>
+      <Link href="/directory" className="text-link large about-explore">استكشف السجلات المنشورة <span aria-hidden="true">↙</span></Link>
+    </div>
+  </div></section>;
+}

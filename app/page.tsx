@@ -4,11 +4,12 @@ import SearchDirectory from "@/components/SearchDirectory";
 import PosterScene from "@/components/PosterScene";
 import CategorySymbol from "@/components/CategorySymbol";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
-import { areas, getAreaRecords, neighborhoods, publicRecords } from "@/lib/data";
+import { areas, getAreaRecords, getNeighborhoodRecords, neighborhoods, publicRecords } from "@/lib/data";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const areaCounts = Object.fromEntries(areas.map((area) => [area.slug, getAreaRecords(area.slug).length]));
+const neighborhoodCounts = Object.fromEntries(neighborhoods.map((neighborhood) => [neighborhood.slug, getNeighborhoodRecords(neighborhood.name).length]));
 const featuredPaths = [
   { category: "صيدلية", kind: "pharmacy", eyebrow: "الصحة اليومية", description: "صيدليات منشورة بمصادرها في قرى ومناطق الوقف." },
   { category: "سوبرماركت", kind: "market", eyebrow: "احتياجات البيت", description: "أماكن تسوّق محلية تجدها باسمها ومنطقتها." },
@@ -112,13 +113,34 @@ export default function Home() {
       <section className="section neighborhoods-section">
         <div className="shell split-feature">
           <div className="neighborhood-copy"><span className="section-kicker">03 / الأحياء</span><h2>كل حي له<br />مكان على الدليل.</h2><p>نربط النشاط بالحي حين يؤكد عنوانه أو مصدره ذلك. تصفح الدندراوية، السنابسة، المداكير وغيرها من التجمعات داخل مدينة الوقف.</p><Link href="/areas/alwaqf" className="text-link large">استكشف أحياء مدينة الوقف <span aria-hidden="true">↙</span></Link></div>
-          <div className="neighborhood-board"><div className="board-title"><span>أحياء مدينة الوقف</span><span>دليل المناطق / ١٠</span></div><div className="neighborhood-cloud">{neighborhoods.map((neighborhood, index) => <Link href={`/neighborhoods/${neighborhood.slug}`} key={neighborhood.name}><span>{String(index + 1).padStart(2, "0")}</span>{neighborhood.name}<span aria-hidden="true">↙</span></Link>)}</div><div className="board-footer">عناوين محلية موثقة ومراجعة</div></div>
+          <div className="neighborhood-board">
+            <div className="board-title"><span>أحياء مدينة الوقف</span><span>دليل المناطق / {neighborhoods.length}</span></div>
+            <div className="board-overview">
+              <div className="board-overview-copy"><span>فهرس المكان</span><strong>قريب منك،<br />حيًا بحي.</strong></div>
+              <span className="board-total"><b>{neighborhoods.length}</b><small>أحياء وتجمعات</small></span>
+              <svg viewBox="0 0 520 150" fill="none" aria-hidden="true" className="board-route"><path d="M-20 105C63 102 86 37 162 55S248 158 330 105 435 9 545 38" stroke="currentColor" strokeWidth="2" strokeDasharray="5 8"/><circle cx="81" cy="75" r="7"/><circle cx="246" cy="109" r="7"/><circle cx="402" cy="55" r="7"/></svg>
+            </div>
+            <div className="neighborhood-cloud">{neighborhoods.map((neighborhood, index) => {
+              const count = neighborhoodCounts[neighborhood.slug];
+              return <Link href={`/neighborhoods/${neighborhood.slug}`} key={neighborhood.name}>
+                <span className="board-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="board-name">{neighborhood.name}</span>
+                <span className="board-count">{count ? `${count} سجل` : "قيد الإضافة"}</span>
+                <span className="board-arrow" aria-hidden="true">↙</span>
+              </Link>;
+            })}</div>
+            <div className="board-footer"><span className="board-footer-dot" /> العدد يعكس السجلات الجاهزة للنشر في كل حي</div>
+          </div>
         </div>
       </section>
 
       <section className="section methodology">
         <div className="shell"><div className="section-head methodology-head"><div><span className="section-kicker">كيف نعمل؟</span><h2>الدقة تبدأ قبل النشر.</h2></div><Link href="/about" className="text-link large">اقرأ منهج الدليل <span aria-hidden="true">↙</span></Link></div>
-          <div className="methodology-grid"><div className="method-card"><span>01 / نجمع</span><h3>معلومة لها أصل</h3><p>نبدأ بمصادر قابلة للمراجعة، من الجهات الرسمية إلى الأدلة والخرائط المحلية.</p></div><div className="method-card"><span>02 / نراجع</span><h3>عنوان في مكانه</h3><p>نطابق الأسماء والعناوين والهواتف، ونفصل التكرار والتعارض قبل العرض.</p></div><div className="method-card"><span>03 / ننشر</span><h3>الجاهز فقط</h3><p>تظهر السجلات المكتملة، وتبقى البيانات التي تحتاج تحققًا إضافيًا خارج الدليل العام.</p></div></div>
+          <div className="methodology-grid">
+            <div className="method-card"><div className="method-top"><span className="method-icon"><SearchIcon /></span><span className="method-step">01 / نجمع</span></div><h3>معلومة لها أصل</h3><p>نبدأ بمصادر قابلة للمراجعة، من الجهات الرسمية إلى الأدلة والخرائط المحلية.</p><span className="method-foot">البداية · المصدر</span></div>
+            <div className="method-card"><div className="method-top"><span className="method-icon"><MapPinIcon /></span><span className="method-step">02 / نراجع</span></div><h3>عنوان في مكانه</h3><p>نطابق الأسماء والعناوين والهواتف، ونفصل التكرار والتعارض قبل العرض.</p><span className="method-foot">الوسط · المطابقة</span></div>
+            <div className="method-card"><div className="method-top"><span className="method-icon"><CheckIcon /></span><span className="method-step">03 / ننشر</span></div><h3>الجاهز فقط</h3><p>تظهر السجلات المكتملة، وتبقى البيانات التي تحتاج تحققًا إضافيًا خارج الدليل العام.</p><span className="method-foot">النتيجة · دليل موثوق</span></div>
+          </div>
         </div>
       </section>
     </>
