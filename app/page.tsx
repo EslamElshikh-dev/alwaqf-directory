@@ -4,6 +4,7 @@ import SearchDirectory from "@/components/SearchDirectory";
 import PosterScene from "@/components/PosterScene";
 import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
+import AreaScene from "@/components/AreaScene";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
 import { areas, getAreaRecords, getNeighborhoodRecords, neighborhoods, publicRecords } from "@/lib/data";
 
@@ -76,7 +77,7 @@ export default function Home() {
               <Link href={`/areas/${area.slug}`} className={`area-card area-${index + 1}`} key={area.slug}>
                 <span className="area-index">0{index + 1}</span>
                 <span className="area-type">{area.accent}</span>
-                <span className="area-letter" aria-hidden="true">{area.name.charAt(0)}</span>
+                <AreaScene kind={area.slug} />
                 <div className="area-content"><span className="area-kicker">{area.kicker}</span><h3>{area.name}</h3><p>{area.description}</p></div>
                 <div className="area-bottom"><span><b>{areaCounts[area.slug]}</b> سجل جاهز</span><span className="circle-arrow" aria-hidden="true">↙</span></div>
               </Link>
