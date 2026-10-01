@@ -483,3 +483,102 @@ button,input,select{font:inherit}
   .related-card{min-height:0}
   .page-hero{min-height:0}
 }
+
+/* Area chapters carry the landscape identity from the landing page into the directory. */
+.area-chapter-page{padding-top:26px}
+.chapter-breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 17px;color:#678174;font-size:12px;font-weight:700}
+.chapter-breadcrumb a{color:#326d58;transition:color .2s}
+.chapter-breadcrumb a:hover{color:#173e31;text-decoration:underline}
+.chapter-breadcrumb span[aria-hidden]{color:#b5c1b3}
+.chapter-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:458px;padding:0;margin:0 0 58px;border-color:#194d40;border-radius:25px 25px 5px 25px;background:#123f36;box-shadow:0 25px 65px rgba(20,63,50,.13);color:#fff}
+.chapter-hero:before,.chapter-hero:after{display:none}
+.chapter-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;padding:44px 51px 49px}
+.chapter-overline{display:flex;align-items:center;gap:9px;padding-bottom:15px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,.22);color:#c5ded2;font-size:11px;font-weight:700;letter-spacing:.02em}
+.chapter-overline>span:not(.chapter-sigil){color:#d9bd85}
+.chapter-sigil{display:grid;place-items:center;width:25px;height:25px;border:1px solid #b9a471;border-radius:7px;color:#f0cc87;font-size:15px}
+.chapter-copy .section-kicker{color:#e3c087}
+.chapter-copy h1{margin:7px 0 15px;font-size:clamp(45px,5.1vw,72px);line-height:1.26;letter-spacing:-.04em}
+.chapter-copy p{max-width:520px;color:#d6e5da;font-size:16px;line-height:1.95}
+.chapter-copy .area-stats{gap:9px;margin-top:28px}
+.chapter-copy .area-stats span{padding:6px 13px;border-color:rgba(205,231,212,.24);background:rgba(244,250,239,.08);color:#dce9dc}
+.chapter-copy .area-stats b{color:#f1d094}
+.chapter-visual{position:relative;isolation:isolate;display:grid;place-items:center;min-width:0;min-height:380px;overflow:hidden;border-right:1px solid rgba(255,255,255,.12);background:radial-gradient(circle at 52% 35%,rgba(222,231,202,.2),transparent 34%),linear-gradient(145deg,#336c56,#1a564b)}
+.chapter-visual:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.32;background:repeating-linear-gradient(90deg,transparent 0 42px,rgba(255,255,255,.11) 43px,transparent 44px 86px),repeating-linear-gradient(0deg,transparent 0 42px,rgba(255,255,255,.1) 43px,transparent 44px 86px)}
+.chapter-orbit{position:absolute;width:450px;height:450px;border:1px solid rgba(249,236,200,.23);border-radius:50%;box-shadow:0 0 0 55px rgba(249,236,200,.03),0 0 0 110px rgba(249,236,200,.025)}
+.chapter-orbit-one{right:-110px;top:-170px}
+.chapter-orbit-two{left:-270px;bottom:-380px;width:600px;height:600px}
+.chapter-visual .area-scene{position:relative;z-index:1;width:min(110%,620px);max-height:none;margin:0;filter:drop-shadow(0 23px 20px rgba(14,45,34,.24));transform:scale(1.08);--scene-line:#e3ecdb;--scene-accent:#f3c783;--scene-fill:rgba(234,245,219,.15);--scene-water:#9fd0ba}
+.chapter-visual-label,.chapter-folio{position:absolute;z-index:2;color:#e6efdb;font-size:11px;font-weight:700;text-shadow:0 2px 10px rgba(15,47,35,.35)}
+.chapter-visual-label{right:28px;top:24px;padding:6px 11px;border:1px solid rgba(255,255,255,.4);border-radius:30px;background:rgba(17,64,50,.22)}
+.chapter-folio{left:29px;bottom:26px;font-family:Arial,"IBM Plex Sans Arabic",sans-serif;font-size:27px;letter-spacing:.08em;direction:ltr}
+.chapter-folio i{font-style:normal;font-size:15px;color:#d0bd8d}
+.chapter-foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:51px;padding:10px 26px;border-top:1px solid rgba(255,255,255,.15);color:#b9d2c5;font-size:11px;font-weight:700}
+.chapter-foot span span,.chapter-foot a span{color:#efc989}
+.chapter-foot a{color:#f5d49c}
+.chapter-almarashda .chapter-visual{background:radial-gradient(circle at 50% 38%,rgba(246,227,184,.3),transparent 39%),linear-gradient(145deg,#707e57,#315f4a)}
+.chapter-alqalamina .chapter-visual{background:radial-gradient(circle at 46% 31%,rgba(239,228,192,.22),transparent 36%),linear-gradient(135deg,#637c68,#28574f)}
+.chapter-jazirat-alhamoudi .chapter-visual{background:radial-gradient(circle at 45% 36%,rgba(169,229,216,.22),transparent 38%),linear-gradient(145deg,#327c77,#164d4b)}
+.neighborhood-chapter .chapter-visual{background:radial-gradient(circle at 52% 38%,rgba(239,226,180,.24),transparent 38%),linear-gradient(145deg,#416c59,#244f43)}
+.chapter-source{display:inline-flex;align-items:center;gap:13px;margin-top:21px;padding-bottom:3px;border-bottom:1px solid rgba(237,207,149,.65);color:#f0cd90;font-size:13px;font-weight:700}
+.chapter-source:hover{color:#fff}
+.chapter-section-title{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:21px}
+.chapter-section-title h2,.chapter-neighborhoods h2,.chapter-directory-heading h2{margin:5px 0 0;font-size:clamp(30px,3.2vw,42px);line-height:1.4;letter-spacing:-.035em}
+.chapter-section-title h2 em{color:#2d8160;font-style:normal}
+.chapter-section-title>span{padding-bottom:6px;color:#6a7c70;font-size:13px}
+.chapter-categories{margin-bottom:62px}
+.chapter-category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.chapter-category{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-width:0;min-height:176px;padding:20px 21px 16px;overflow:hidden;border:1px solid #d0dccd;border-radius:18px 18px 18px 4px;background:#e9f0e7;transition:transform .2s,border-color .2s,box-shadow .2s}
+.chapter-category:nth-child(2){background:#f3eee2;border-color:#e0d9c9}
+.chapter-category:nth-child(3){background:#e4ece7}
+.chapter-category:nth-child(4){background:#edf0e6}
+.chapter-category:before{content:"";position:absolute;left:-49px;top:-48px;width:145px;height:145px;border:1px solid rgba(37,103,76,.16);border-radius:50%;box-shadow:0 0 0 21px rgba(37,103,76,.035),0 0 0 42px rgba(37,103,76,.025)}
+.chapter-category:hover{transform:translateY(-4px);border-color:#98b69c;box-shadow:0 15px 28px rgba(24,72,48,.09)}
+.chapter-category-number{position:relative;color:#648875;font-family:Arial,sans-serif;font-size:12px;font-weight:700}
+.chapter-category strong{position:relative;font-size:21px;line-height:1.4}
+.chapter-category-meta{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:12px;border-top:1px solid rgba(41,93,62,.16);color:#53715e;font-size:12px;font-weight:700}
+.chapter-category-meta span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#1c5b49;color:#fff;font-size:14px;transition:transform .2s}
+.chapter-category:hover .chapter-category-meta span{transform:translate(-3px,3px)}
+.chapter-neighborhoods{display:grid;grid-template-columns:230px minmax(0,1fr);gap:25px;margin:0 0 56px;padding:25px 27px;border:1px solid #d3ddcf;border-radius:18px 18px 4px 18px;background:#f2f3eb}
+.chapter-neighborhoods h2{font-size:28px}
+.chapter-neighborhoods .neighborhood-links{display:flex;align-content:center;align-items:center;gap:8px;margin:0}
+.chapter-neighborhoods .neighborhood-links a{display:inline-flex;align-items:center;gap:13px;padding:7px 13px;background:#fff;font-size:12px;transition:background .2s,transform .2s}
+.chapter-neighborhoods .neighborhood-links a:hover{transform:translateY(-2px);background:#e2efe1}
+.chapter-neighborhoods .neighborhood-links a span{color:#ab9164}
+.chapter-directory-heading{margin:0 0 21px;padding-top:19px;border-top:1px solid #d3ded2}
+.directory-module{scroll-margin-top:104px}
+
+@media(max-width:900px){
+  .chapter-hero{grid-template-columns:minmax(0,1fr) minmax(0,.85fr)}
+  .chapter-copy{padding:37px 31px}
+  .chapter-visual{min-height:340px}
+  .chapter-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chapter-neighborhoods{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .area-chapter-page{padding-top:18px}
+  .chapter-hero{grid-template-columns:1fr;margin-bottom:43px;border-radius:20px 20px 4px 20px}
+  .chapter-copy{padding:29px 24px 32px}
+  .chapter-overline{margin-bottom:25px}
+  .chapter-copy h1{font-size:clamp(39px,10vw,57px)}
+  .chapter-copy p{font-size:15px}
+  .chapter-copy .area-stats{margin-top:21px}
+  .chapter-visual{min-height:236px;border-right:0;border-top:1px solid rgba(255,255,255,.15)}
+  .chapter-visual .area-scene{width:min(100%,490px);transform:none}
+  .chapter-visual-label{right:18px;top:16px;font-size:10px}
+  .chapter-folio{left:21px;bottom:13px;font-size:20px}
+  .chapter-foot{min-height:48px;padding:9px 18px;font-size:10px}
+  .chapter-section-title{display:block}
+  .chapter-section-title>span{display:block;margin-top:3px}
+  .chapter-categories{margin-bottom:44px}
+  .chapter-category-grid{gap:9px}
+  .chapter-category{min-height:147px;padding:14px}
+  .chapter-category strong{font-size:16px}
+  .chapter-category-meta{font-size:11px}
+  .chapter-neighborhoods{gap:16px;margin-bottom:43px;padding:20px}
+  .chapter-neighborhoods h2{font-size:26px}
+}
+@media(max-width:370px){
+  .chapter-category-grid{grid-template-columns:1fr}
+  .chapter-category{min-height:125px}
+  .chapter-foot span:last-child{display:none}
+}
