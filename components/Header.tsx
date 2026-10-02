@@ -18,8 +18,8 @@ export default function Header() {
         </nav>
         <form className="header-search" role="search" action="/directory" method="get">
           <SearchIcon className="header-search-icon" aria-hidden="true" />
-          <input type="search" name="q" maxLength={120} aria-label="ابحث في دليل الوقف" placeholder="نشاط، خدمة أو منطقة…" enterKeyHint="search" />
-          <button type="submit" aria-label="عرض نتائج البحث">ابحث <span aria-hidden="true">↙</span></button>
+          <input type="search" name="q" maxLength={120} aria-label="ابحث في دليل الوقف" placeholder="ابحث هنا…" enterKeyHint="search" />
+          <button type="submit" aria-label="عرض نتائج البحث"><span className="header-search-submit-text">ابحث</span><span className="header-search-submit-arrow" aria-hidden="true">↙</span><SearchIcon className="header-search-submit-icon" aria-hidden="true" /></button>
         </form>
       </div>
     </header><MobileNavigation /></>
