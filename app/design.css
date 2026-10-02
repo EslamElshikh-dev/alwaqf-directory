@@ -520,7 +520,7 @@ button,input,select{font:inherit}
 .chapter-jazirat-alhamoudi .chapter-visual{background:radial-gradient(circle at 45% 36%,rgba(169,229,216,.22),transparent 38%),linear-gradient(145deg,#327c77,#164d4b)}
 .neighborhood-chapter .chapter-visual{background:radial-gradient(circle at 52% 38%,rgba(239,226,180,.24),transparent 38%),linear-gradient(145deg,#416c59,#244f43)}
 .neighborhood-chapter .chapter-visual:before{opacity:.16}
-.neighborhood-scene{position:relative;z-index:1;width:min(115%,620px);max-width:none;margin-top:20px;filter:drop-shadow(0 18px 12px rgba(16,50,37,.26))}
+.neighborhood-scene{position:relative;z-index:1;width:min(115%,620px);height:auto;max-width:none;margin-top:20px;filter:drop-shadow(0 18px 12px rgba(16,50,37,.26))}
 .neighborhood-jump{display:inline-flex;align-items:center;gap:24px;margin-top:25px;padding:12px 18px;border:1px solid #eed7a3;border-radius:9px;background:#e9ca8d;color:#193f33;font-size:13px;font-weight:800;box-shadow:0 8px 20px rgba(10,34,28,.13);transition:transform .2s,background .2s}
 .neighborhood-jump:hover{transform:translateY(-3px);background:#f4dca6}
 .neighborhood-chapter .chapter-source{margin-top:17px}
