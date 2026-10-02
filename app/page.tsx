@@ -6,7 +6,7 @@ import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
 import AreaScene from "@/components/AreaScene";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
-import { areas, getAreaRecords, getNeighborhoodRecords, neighborhoods, publicRecords } from "@/lib/data";
+import { areas, getAreaRecords, getNeighborhoodRecords, getRecord, neighborhoods, publicRecords } from "@/lib/data";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
@@ -18,6 +18,10 @@ const featuredPaths = [
   { category: "تعليم ابتدائي", kind: "school", eyebrow: "التعليم", description: "مدارس ابتدائية لها صفحة ومعلومة قابلة للمراجعة." },
   { category: "مسجد", kind: "mosque", eyebrow: "معالم وخدمات", description: "مساجد مدرجة بعناوينها المحلية في الدليل." },
 ] as const;
+const spotlightRecords = ["WK-001", "MR-001", "QL-001", "CH-006"].flatMap((id) => {
+  const record = getRecord(id);
+  return record ? [record] : [];
+});
 
 export default function Home() {
   const categoriesCount = new Set(publicRecords.map((record) => record.category)).size;
@@ -141,6 +145,19 @@ export default function Home() {
             })}</div>
             <div className="board-footer"><span className="board-footer-dot" /> العدد يعكس السجلات الجاهزة للنشر في كل حي</div>
           </div>
+        </div>
+      </section>
+
+      <section className="section spotlight-section" aria-labelledby="spotlight-title">
+        <div className="shell">
+          <div className="spotlight-header"><div><span className="section-kicker">04 / من قلب الدليل</span><h2 id="spotlight-title">أماكن حقيقية.<br /><em>لكل منها ملف.</em></h2></div><p>من المدينة إلى القرى، هذه نماذج من سجلات منشورة. افتح أي ملف لتعرف مكانه وتفاصيله والمصدر الذي استندنا إليه.</p></div>
+          <div className="spotlight-gallery">
+            {spotlightRecords.map((record, index) => <Link href={`/place/${record.id}`} className={`spotlight-card spotlight-card-${index + 1}`} key={record.id}>
+              <span className="spotlight-image"><Image src={`/places/${record.id}.svg`} alt={`رسم تعبيري لفئة ${record.category}`} fill sizes={index === 0 ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 600px) 38vw, (max-width: 900px) 40vw, 20vw"} /><span>رسم تعبيري</span></span>
+              <span className="spotlight-copy"><span className="spotlight-label"><span>{String(index + 1).padStart(2, "0")} / 04</span><span>{record.batch_area}</span></span><span className="spotlight-category">{record.category}</span><strong>{record.name_ar}</strong><span className="spotlight-facts">{record.facts}</span><span className="spotlight-open">استعرض الملف <span aria-hidden="true">↙</span></span></span>
+            </Link>)}
+          </div>
+          <div className="spotlight-footer"><span><span aria-hidden="true">✦</span> كل ملف معروض هنا جاهز للنشر وله مصدر يمكن مراجعته.</span><Link href="/directory">شاهد الدليل كاملًا <span aria-hidden="true">↙</span></Link></div>
         </div>
       </section>
 
