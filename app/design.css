@@ -597,13 +597,13 @@ button,input,select{font:inherit}
   .neighborhood-scene{width:100%;margin-top:8px}
   .neighborhood-jump{margin-top:20px}
   .neighborhood-next{gap:17px;margin-top:43px;padding:21px 18px}
+  .neighborhood-next-links{grid-template-columns:1fr}
   .neighborhood-next-links strong{font-size:13px}
 }
 @media(max-width:370px){
   .chapter-category-grid{grid-template-columns:1fr}
   .chapter-category{min-height:125px}
   .chapter-foot span:last-child{display:none}
-  .neighborhood-next-links{grid-template-columns:1fr}
 }
 
 /* An activity reads like a local dossier: illustration, facts, and traceable reference. */
