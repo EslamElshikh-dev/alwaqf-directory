@@ -12,7 +12,13 @@ export default function MobileNavigation() {
     const syncHash = () => setHash(window.location.hash);
     syncHash();
     window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
+    window.addEventListener("popstate", syncHash);
+    window.addEventListener("scroll", syncHash, { passive: true });
+    return () => {
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("popstate", syncHash);
+      window.removeEventListener("scroll", syncHash);
+    };
   }, [pathname]);
   const current = pathname === "/about" ? "about"
     : pathname.startsWith("/areas/") || pathname.startsWith("/neighborhoods/") || (pathname === "/" && (hash === "#areas" || hash === "#neighborhoods")) ? "areas"
@@ -28,7 +34,7 @@ export default function MobileNavigation() {
 
   return <nav className="mobile-dock" aria-label="التنقل السريع">
     <div className="mobile-dock-inner">
-      {destinations.map(({ id, href, label, Icon }) => <Link key={id} href={href} className={`mobile-dock-link mobile-dock-${id}${current === id ? " is-active" : ""}`} aria-current={pathname === href ? "page" : current === id ? "location" : undefined}>
+      {destinations.map(({ id, href, label, Icon }) => <Link key={id} href={href} onClick={() => setHash(id === "areas" ? "#areas" : "")} className={`mobile-dock-link mobile-dock-${id}${current === id ? " is-active" : ""}`} aria-current={pathname === href ? "page" : current === id ? "location" : undefined}>
         <span className="mobile-dock-icon" aria-hidden="true"><Icon /></span><span className="mobile-dock-label">{label}</span>
       </Link>)}
     </div>
