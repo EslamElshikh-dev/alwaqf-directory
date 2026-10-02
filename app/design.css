@@ -947,6 +947,12 @@ button,input,select{font:inherit}
   .hero h1{font-size:clamp(39px,10.5vw,58px)}
   .hero-copy>p{font-size:15px;line-height:1.9}
   .hero-actions .primary-button,.hero-actions .ghost-button{min-height:52px}
+  .hero-poster{min-height:590px}
+  .poster-photo{height:238px}
+  .poster-content{margin-top:166px}
+  .poster-content h2{font-size:28px;margin-bottom:10px}
+  .route-stop{min-height:39px}
+  .poster-foot{padding-top:11px}
   .hero-stats{margin-top:43px}
   .home-index{margin-top:20px}
   .section{padding-block:57px}
@@ -971,4 +977,5 @@ button,input,select{font:inherit}
 @media(hover:none){
   .record-card:not(:active):hover,.area-card:not(:active):hover,.path-card:not(:active):hover,.spotlight-card:not(:active):hover{transform:none;box-shadow:none}
   .record-card:hover .record-art img,.path-card:hover .path-image img{transform:none}
+  .header-cta:hover{transform:none}
 }
