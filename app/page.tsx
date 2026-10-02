@@ -66,6 +66,13 @@ export default function Home() {
             <div><strong>{categoriesCount}</strong><span>فئة متنوعة</span></div>
             <div><strong>{areas.length}</strong><span>مناطق رئيسية</span></div>
           </div>
+          <nav className="home-index" aria-label="فهرس رحلة الاستكشاف">
+            <div className="home-index-intro"><span aria-hidden="true">✦</span><strong>رحلتك في الوقف</strong><small>أربع طرق لبدء الاستكشاف</small></div>
+            <a href="#areas"><span className="home-index-number">01 / المكان</span><strong>اختر منطقتك</strong><small>مدينة الوقف وقراها</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
+            <a href="#paths"><span className="home-index-number">02 / الاحتياج</span><strong>ابدأ من الخدمة</strong><small>مسارات سريعة للفئات</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
+            <a href="#search"><span className="home-index-number">03 / الدليل</span><strong>ابحث بالاسم</strong><small>نتائج قابلة للتصفية</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
+            <a href="#neighborhoods"><span className="home-index-number">04 / الأقرب</span><strong>تصفح الأحياء</strong><small>من الحي إلى النشاط</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
+          </nav>
         </div>
       </section>
 
@@ -86,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section paths-section" aria-labelledby="paths-title">
+      <section className="section paths-section" id="paths" aria-labelledby="paths-title">
         <div className="shell">
           <div className="paths-heading"><div><span className="section-kicker">اختصار الطريق</span><h2 id="paths-title">ابدأ من<br /><em>احتياجك اليوم.</em></h2></div><p>أربع بدايات سريعة من فئات موجودة في الدليل. اختر واحدة، ثم ابحث داخل نتائجها عن الاسم أو المنطقة التي تريدها.</p></div>
           <div className="path-grid">
@@ -113,7 +120,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section neighborhoods-section">
+      <section className="section neighborhoods-section" id="neighborhoods">
         <div className="shell split-feature">
           <div className="neighborhood-copy"><span className="section-kicker">03 / الأحياء</span><h2>كل حي له<br />مكان على الدليل.</h2><p>نربط النشاط بالحي حين يؤكد عنوانه أو مصدره ذلك. تصفح الدندراوية، السنابسة، المداكير وغيرها من التجمعات داخل مدينة الوقف.</p><Link href="/areas/alwaqf" className="text-link large">استكشف أحياء مدينة الوقف <span aria-hidden="true">↙</span></Link></div>
           <div className="neighborhood-board">

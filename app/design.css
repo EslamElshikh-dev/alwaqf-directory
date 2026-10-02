@@ -779,3 +779,33 @@ button,input,select{font:inherit}
   .directory-more{display:grid;gap:19px;padding:23px 21px}
   .directory-more-control{width:100%}
 }
+
+/* A compact route index connects the home chapter to its actual destinations. */
+.home-index{display:grid;grid-template-columns:minmax(190px,.8fr) repeat(4,minmax(0,1fr));margin:23px 0 32px;overflow:hidden;border:1px solid #cad9cb;border-radius:20px 20px 4px 20px;background:#fffefa;box-shadow:0 19px 42px rgba(17,67,46,.09)}
+.home-index-intro{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:center;min-height:150px;padding:19px 24px;overflow:hidden;background:#174f40;color:#fff}
+.home-index-intro:before{content:"";position:absolute;z-index:-1;left:-42px;bottom:-100px;width:210px;height:210px;border:1px solid rgba(237,215,166,.28);border-radius:50%;box-shadow:0 0 0 25px rgba(237,215,166,.045),0 0 0 50px rgba(237,215,166,.035)}
+.home-index-intro>span{display:grid;place-items:center;width:27px;height:27px;margin-bottom:11px;border:1px solid #bba875;border-radius:8px;color:#f0d49c;font-size:14px}
+.home-index-intro strong{font-size:17px;line-height:1.45}
+.home-index-intro small{margin-top:2px;color:#c8ddc8;font-size:11px}
+.home-index>a{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;min-height:150px;padding:20px 23px;border-left:1px solid #e0e6d9;transition:background .2s}
+.home-index>a:last-child{border-left:0}
+.home-index>a:hover,.home-index>a:focus-visible{background:#eff5ec}
+.home-index-number{margin-bottom:9px;color:#a17e4d;font-family:Arial,"IBM Plex Sans Arabic",sans-serif;font-size:10px;font-weight:800}
+.home-index>a strong{color:#194f3a;font-size:18px;line-height:1.45}
+.home-index>a small{margin-top:3px;color:#6e8174;font-size:11px;line-height:1.5}
+.home-index-arrow{position:absolute;left:16px;bottom:14px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#e6f0e7;color:#2b785a;font-size:15px;transition:transform .2s,background .2s,color .2s}
+.home-index>a:hover .home-index-arrow{transform:translate(-3px,3px);background:#1e6a4f;color:#fff}
+@media(max-width:960px){
+  .home-index{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:28px}
+  .home-index-intro{grid-column:1/-1;min-height:88px;padding:16px 21px}
+  .home-index-intro>span{position:absolute;left:23px;top:29px;margin:0}
+  .home-index>a{min-height:125px;border-top:1px solid #e0e6d9}
+  .home-index>a:nth-of-type(2){border-left:0}
+}
+@media(max-width:650px){
+  .home-index{margin:29px 0 19px;border-radius:16px 16px 4px 16px}
+  .home-index>a{min-height:131px;padding:15px 16px 25px}
+  .home-index>a strong{font-size:16px}
+  .home-index>a small{max-width:150px;font-size:10px}
+  .home-index-arrow{left:11px;bottom:10px;width:23px;height:23px;font-size:13px}
+}
