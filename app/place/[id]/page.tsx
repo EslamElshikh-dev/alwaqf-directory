@@ -56,23 +56,37 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
           <span aria-current="page">{record.name_ar}</span>
         </nav>
 
-        <article className="detail-card">
-          <div className="detail-art"><Image src={`/places/${record.id}.svg`} width={600} height={340} alt={`رسم تعبيري مخصص لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, 900px" /><span>رسم توضيحي للنشاط · ليس صورة للمكان</span></div>
-          <div className="record-top"><span className="category-chip">{record.category}</span><span className="verified"><CheckIcon /> {statusLabel(record.confidence)}</span></div>
-          <h1>{record.name_ar}</h1>
-          <p className="detail-lead">{record.facts}</p>
-          <div className="detail-grid">
-            <div><span className="detail-label">الموقع</span><strong><MapPinIcon /> {record.locality}</strong></div>
-            {record.phone_or_code ? <div><span className="detail-label">الهاتف / الرمز</span><strong><PhoneIcon /> {record.phone_or_code}</strong></div> : null}
-            <div><span className="detail-label">المركز والمحافظة</span><strong>الوقف · قنا</strong></div>
-            <div><span className="detail-label">رقم السجل</span><strong>{record.id}</strong></div>
+        <article className="place-profile">
+          <div className="place-cover">
+            <div className="place-cover-copy">
+              <div className="place-cover-overline"><span className="place-sigil" aria-hidden="true">✦</span><span>دليل الوقف</span><span aria-hidden="true">/</span><span>ملف نشاط</span></div>
+              <div className="place-cover-tags"><span className="place-category">{record.category}</span><span className="place-confidence"><CheckIcon /> {statusLabel(record.confidence)}</span></div>
+              <h1>{record.name_ar}</h1>
+              <p className="place-cover-lead">{record.facts}</p>
+              <div className="place-cover-actions">
+                {phone?.length ? <a className="place-call" href={`tel:${phone[0].replace(/\D/g, "")}`}><PhoneIcon /> اتصل الآن <span>{phone[0]}</span></a> : null}
+                <a className="place-source-jump" href="#place-source">راجع مرجع السجل <span aria-hidden="true">↙</span></a>
+              </div>
+              <div className="place-cover-location"><MapPinIcon /><span>{record.locality}</span>{area ? <Link href={`/areas/${area.slug}`}>استكشف {area.name} <span aria-hidden="true">↙</span></Link> : null}</div>
+            </div>
+            <div className="place-cover-visual"><span className="place-visual-orbit" aria-hidden="true"/><div className="place-art-frame"><Image src={`/places/${record.id}.svg`} width={600} height={340} alt={`رسم تعبيري مخصص لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, 50vw" /><span>رسم تعبيري · ليس صورة للمكان</span></div><div className="place-visual-foot"><span>من المكان إلى التفاصيل</span><b>{record.id}</b></div></div>
           </div>
-          {phone?.length ? <a className="detail-call" href={`tel:${phone[0].replace(/\D/g, "")}`}><PhoneIcon /> اتصل الآن <span>{phone[0]}</span></a> : null}
-          <div className="source-box"><span>مصدر التحقق</span><a href={record.source_url} target="_blank" rel="noreferrer">فتح المصدر الأصلي ↗</a></div>
+          <div className="place-information">
+            <section className="place-information-main" aria-labelledby="place-information-title">
+              <span className="section-kicker">تفاصيل في لمحة</span><h2 id="place-information-title">عن هذا <em>النشاط</em></h2>
+              <dl className="place-facts-list">
+                <div><dt><MapPinIcon /> الموقع</dt><dd>{record.locality}</dd></div>
+                {record.phone_or_code ? <div><dt><PhoneIcon /> الهاتف / الرمز</dt><dd dir="auto">{record.phone_or_code}</dd></div> : null}
+                <div><dt>المركز والمحافظة</dt><dd>الوقف · قنا</dd></div>
+                <div><dt>رقم السجل</dt><dd className="place-record-id">{record.id}</dd></div>
+              </dl>
+            </section>
+            <aside className="place-source-panel" id="place-source" aria-labelledby="place-source-title"><span className="place-source-emblem" aria-hidden="true">✦</span><span className="place-source-kicker">مرجع السجل</span><h2 id="place-source-title">تحقّق من التفاصيل</h2><p>اطّلع على الرابط المرفق بهذا السجل، وراجع الاسم والعنوان في المصدر قبل الاعتماد على المعلومات.</p><a href={record.source_url} target="_blank" rel="noreferrer">فتح رابط المصدر <span aria-hidden="true">↗</span></a><small>الدليل يتوسع تدريجيًا، وقد تتغير بيانات الأنشطة.</small></aside>
+          </div>
         </article>
 
         {related.length ? <section className="related-section" aria-labelledby="related-title">
-          <div className="related-heading"><div><span className="section-kicker">تابع الاستكشاف</span><h2 id="related-title">المزيد في {record.batch_area}</h2></div>{area ? <Link href={`/areas/${area.slug}`} className="text-link large">عرض صفحة المنطقة <span aria-hidden="true">↙</span></Link> : null}</div>
+          <div className="related-heading"><div><span className="section-kicker">تابع الاستكشاف</span><h2 id="related-title">المزيد في {record.batch_area}</h2></div>{area ? <a href={`/areas/${area.slug}?category=${encodeURIComponent(record.category)}#directory-results`} className="text-link large">كل أنشطة {record.category} <span aria-hidden="true">↙</span></a> : null}</div>
           <div className="related-grid">{related.map((item) => <Link href={`/place/${item.id}`} className="related-card" key={item.id}>
             <span className="related-art"><Image src={`/places/${item.id}.svg`} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, 33vw" /></span>
             <span className="related-category">{item.category}</span>
