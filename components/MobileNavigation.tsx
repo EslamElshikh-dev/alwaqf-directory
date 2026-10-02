@@ -2,12 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { HomeIcon, InfoIcon, MapPinIcon, SearchIcon } from "./Icons";
 
 export default function MobileNavigation() {
   const pathname = usePathname();
+  const [hash, setHash] = useState("");
+  useEffect(() => {
+    const syncHash = () => setHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [pathname]);
   const current = pathname === "/about" ? "about"
-    : pathname.startsWith("/areas/") || pathname.startsWith("/neighborhoods/") ? "areas"
+    : pathname.startsWith("/areas/") || pathname.startsWith("/neighborhoods/") || (pathname === "/" && (hash === "#areas" || hash === "#neighborhoods")) ? "areas"
     : pathname === "/directory" || pathname.startsWith("/place/") ? "directory"
     : "home";
 
