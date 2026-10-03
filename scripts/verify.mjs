@@ -27,12 +27,18 @@ for (const r of ready) {
  if (hasPlaceScene(r.id)) assert(detail.includes('تصور فني · ليس صورة للمكان'), `Scene disclaimer missing for ${r.id}`);
 }
 assert.equal(artworkHashes.size, ready.length, 'Artwork must not repeat between records');
+const marashdaPage = fs.readFileSync('.next/server/app/areas/almarashda.html','utf8');
+for (const id of ['MR-001','MR-002','MR-003','MR-004','MR-005','MR-006','MR-007','MR-009']) {
+ assert(ready.some(r=>r.id===id), `${id} must be public before featuring it`);
+ assert(marashdaPage.includes(`/place/${id}`) && marashdaPage.includes(`/images/places/${id}.webp`), `${id} missing from the Al-Marashda visual route`);
+}
+assert(marashdaPage.includes('الصور تصورات فنية للفئات'), 'The visual route must identify the scenes as artwork');
 for(const r of master.records.filter(r=>!isPublishable(r))) {
  assert(!fs.existsSync(`public/places/${r.id}.svg`), `${r.id} has a non-public artwork`);
  assert(!fs.existsSync(`public/images/places/${r.id}.webp`), `${r.id} has a non-public scene`);
  assert(!sitemap.includes(`/place/${r.id}`));
  assert(!fs.existsSync(`.next/server/app/place/${r.id}.html`));
- for(const f of ['.next/server/app/index.html','.next/server/app/directory.html']) assert(!fs.readFileSync(f,'utf8').includes(r.id),`${r.id} leaked into ${f}`);
+ for(const f of ['.next/server/app/index.html','.next/server/app/directory.html','.next/server/app/areas/almarashda.html']) assert(!fs.readFileSync(f,'utf8').includes(r.id),`${r.id} leaked into ${f}`);
 }
 for(const f of fs.readdirSync('.next/static/chunks').filter(f=>f.endsWith('.js'))){
  const js=fs.readFileSync(`.next/static/chunks/${f}`,'utf8');

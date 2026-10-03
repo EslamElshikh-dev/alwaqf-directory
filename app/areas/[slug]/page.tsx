@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import AreaScene from "@/components/AreaScene";
 import JsonLd from "@/components/JsonLd";
 import SearchDirectory from "@/components/SearchDirectory";
 import { areas, getAreaRecords, neighborhoods, siteUrl } from "@/lib/data";
+import { placeArtSrc } from "@/lib/artwork";
+
+const marashdaSceneIds = ["MR-001", "MR-002", "MR-003", "MR-004", "MR-005", "MR-006", "MR-007", "MR-009"];
 
 export function generateStaticParams() {
   return areas.map(area => ({ slug: area.slug }));
@@ -27,6 +31,10 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   if (areaIndex === -1) notFound();
   const area = areas[areaIndex];
   const records = getAreaRecords(slug);
+  const marashdaScenes = slug === "almarashda" ? marashdaSceneIds.flatMap(id => {
+    const record = records.find(item => item.id === id);
+    return record ? [record] : [];
+  }) : [];
   const categoryCounts = new Map<string, number>();
   for (const record of records) categoryCounts.set(record.category, (categoryCounts.get(record.category) ?? 0) + 1);
   const topCategories = [...categoryCounts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ar")).slice(0, 4);
@@ -45,6 +53,20 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
       <div className="chapter-foot"><span>من المركز إلى المكان</span><span>تصفّح الخدمات والأنشطة حسب الفئة <span aria-hidden="true">↙</span></span></div>
     </div>
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: area.name, url: `${siteUrl}/areas/${slug}` }}/>
+    {marashdaScenes.length ? <section className="marashda-scenes" aria-labelledby="marashda-scenes-title">
+      <div className="marashda-scenes-heading">
+        <div><span className="section-kicker">من قلب القرية / {String(marashdaScenes.length).padStart(2, "0")} مشاهد</span><h2 id="marashda-scenes-title">المراشدة، <em>لقطة بلقطة.</em></h2></div>
+        <p>خدمات وأماكن من الدليل في مشاهد مصممة خصيصًا لكل فئة. افتح أي بطاقة لتصل إلى ملفها ومصدرها.</p>
+      </div>
+      <nav className="marashda-scenes-grid" aria-label="ملفات مصوّرة من المراشدة">
+        {marashdaScenes.map((record, index) => <Link href={`/place/${record.id}`} className={`marashda-scene marashda-scene-${index + 1}`} key={record.id}>
+          <Image src={placeArtSrc(record.id)} alt={`تصور فني لفئة ${record.category}`} fill unoptimized sizes="(max-width: 700px) 76vw, (max-width: 900px) 50vw, 25vw" />
+          <span className="marashda-scene-top"><span>{String(index + 1).padStart(2, "0")} / {String(marashdaScenes.length).padStart(2, "0")}</span><span>{record.category}</span></span>
+          <span className="marashda-scene-bottom"><strong>{record.name_ar}</strong><span aria-hidden="true">↙</span></span>
+        </Link>)}
+      </nav>
+      <div className="marashda-scenes-foot"><span>الصور تصورات فنية للفئات، وليست صورًا توثيقية للمنشآت.</span><span className="marashda-scenes-swipe">مرّر لاستكشاف المشاهد <span aria-hidden="true">←</span></span></div>
+    </section> : null}
     {topCategories.length ? <section className="chapter-categories" aria-labelledby="chapter-categories-title"><div className="chapter-section-title"><div><span className="section-kicker">أقرب طريق لما تبحث عنه</span><h2 id="chapter-categories-title">ابدأ من <em>فئة</em></h2></div><span>أبرز الفئات المتاحة في {area.name}</span></div><div className="chapter-category-grid">{topCategories.map(([name, count], index) => <a key={name} href={`/areas/${slug}?category=${encodeURIComponent(name)}#directory-results`} className="chapter-category"><span className="chapter-category-number">{String(index + 1).padStart(2, "0")}</span><strong>{name}</strong><span className="chapter-category-meta">{count} {count === 1 ? "سجل" : "سجلات"}<span aria-hidden="true">↙</span></span></a>)}</div></section> : null}
     {slug === "alwaqf" ? <section className="chapter-neighborhoods" aria-labelledby="chapter-neighborhoods-title"><div><span className="section-kicker">داخل المدينة</span><h2 id="chapter-neighborhoods-title">الأحياء والتجمعات</h2></div><nav aria-label="أحياء مدينة الوقف" className="neighborhood-links">{neighborhoods.map(n => <Link key={n.slug} href={`/neighborhoods/${n.slug}`}>{n.name}<span aria-hidden="true">↗</span></Link>)}</nav></section> : null}
     <div className="chapter-directory-heading"><span className="section-kicker">كل السجلات الجاهزة</span><h2>استكشف دليل {area.name}</h2></div>
