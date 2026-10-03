@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "دليل الوقف", description: "دليل محلي موثّق لمركز الوقف بمحافظة قنا" },
   icons: { icon: "/logo.svg" },
   robots: { index: true, follow: true },
+  verification: { google: "RhoDv6mIF2DsPd84eCLRiv9HGlPI-viiXPcJIJGafDM" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
