@@ -1,7 +1,8 @@
-type Kind = "market" | "school" | "health" | "mosque" | "finance" | "family" | "civic" | "place";
+type Kind = "market" | "school" | "academy" | "health" | "mosque" | "finance" | "family" | "civic" | "place";
 
 function kindFor(category: string): Kind {
   if (/سوبرماركت|سوق|مخبز|مطعم/.test(category)) return "market";
+  if (/تعليم إعدادي|تعليم ثانوي/.test(category)) return "academy";
   if (/تعليم|مدرسة/.test(category)) return "school";
   if (/صيدلية|صحة|مستشفى|إسعاف/.test(category)) return "health";
   if (/مسجد/.test(category)) return "mosque";
@@ -23,6 +24,10 @@ export default function ChapterCategoryGlyph({ category }: { category: string })
     {kind === "school" && <>
       <path d="M17 29c8-3 16-2 23 2 7-4 15-5 23-2v28c-8-2-16-1-23 3-7-4-15-5-23-3V29ZM40 31v29M24 37c4-1 7-1 10 1m-10 6c4-1 7-1 10 1m12-7c3-2 6-2 10-1m-10 8c3-2 6-2 10-1" />
       <path d="M40 24v-6m-5 3h10" strokeWidth="1.5" />
+    </>}
+    {kind === "academy" && <>
+      <path d="M18 34 40 22l22 12v26H18V34ZM24 34h32M28 42h8v8h-8v-8Zm16 0h8v8h-8v-8ZM34 60V50h12v10M15 60h50" />
+      <path d="M40 22V15m0 0h11" strokeWidth="1.5" />
     </>}
     {kind === "health" && <>
       <path d="M34 20h12v13h13v13H46v13H34V46H21V33h13V20Z" />
