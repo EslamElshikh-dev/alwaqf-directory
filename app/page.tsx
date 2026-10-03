@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import SearchDirectory from "@/components/SearchDirectory";
+import DiscoveryRoute from "@/components/DiscoveryRoute";
 import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
 import AreaScene from "@/components/AreaScene";
@@ -22,6 +23,15 @@ const spotlightRecords = ["WK-001", "MR-001", "QL-001", "CH-006"].flatMap((id) =
   const record = getRecord(id);
   return record ? [record] : [];
 });
+const routeCounts = new Map<string, { area: string; category: string; count: number }>();
+for (const record of publicRecords) {
+  const area = record.batch_area || record.locality;
+  const key = `${area}\u0000${record.category}`;
+  const entry = routeCounts.get(key);
+  if (entry) entry.count += 1;
+  else routeCounts.set(key, { area, category: record.category, count: 1 });
+}
+const routeCombinations = [...routeCounts.values()];
 
 export default function Home() {
   const categoriesCount = new Set(publicRecords.map((record) => record.category)).size;
@@ -70,13 +80,7 @@ export default function Home() {
             <div><strong>{categoriesCount}</strong><span>فئة متنوعة</span></div>
             <div><strong>{areas.length}</strong><span>مناطق رئيسية</span></div>
           </div>
-          <nav className="home-index" aria-label="فهرس رحلة الاستكشاف">
-            <div className="home-index-intro"><span aria-hidden="true">✦</span><strong>رحلتك في الوقف</strong><small>أربع طرق لبدء الاستكشاف</small></div>
-            <a href="#areas"><span className="home-index-number">01 / المكان</span><strong>اختر منطقتك</strong><small>مدينة الوقف وقراها</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
-            <a href="#paths"><span className="home-index-number">02 / الاحتياج</span><strong>ابدأ من الخدمة</strong><small>مسارات سريعة للفئات</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
-            <a href="#search"><span className="home-index-number">03 / الدليل</span><strong>ابحث بالاسم</strong><small>نتائج قابلة للتصفية</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
-            <a href="#neighborhoods"><span className="home-index-number">04 / الأقرب</span><strong>تصفح الأحياء</strong><small>من الحي إلى النشاط</small><span className="home-index-arrow" aria-hidden="true">↙</span></a>
-          </nav>
+          <DiscoveryRoute combinations={routeCombinations} areas={areas.map((area) => area.name)} />
         </div>
       </section>
 
