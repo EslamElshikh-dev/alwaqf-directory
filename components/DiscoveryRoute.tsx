@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { MapPinIcon, SearchIcon } from "./Icons";
+import { placeArtSrc } from "@/lib/artwork";
 
 export type RouteCombination = { area: string; category: string; count: number };
 export type RoutePreview = { id: string; name: string; area: string; category: string };
@@ -96,7 +97,7 @@ export default function DiscoveryRoute({ combinations, areas, records }: Props) 
         <div className="discovery-route-preview-head"><div><span>✦ من قلب الدليل</span><h3>أول محطات مسارك</h3></div><p>نظرة على {preview.length} من {count} سجلات جاهزة لهذا الاختيار</p></div>
         <div className="discovery-route-preview-grid">
           {preview.map((record, index) => <Link href={`/place/${record.id}`} className="discovery-route-preview-card" key={record.id}>
-            <span className="discovery-route-preview-art"><Image src={`/places/${record.id}.svg`} width={320} height={190} alt="" unoptimized sizes="(max-width: 650px) 72vw, (max-width: 960px) 42vw, 25vw" /><i aria-hidden="true">0{index + 1}</i></span>
+            <span className="discovery-route-preview-art"><Image src={placeArtSrc(record.id)} width={320} height={190} alt="" unoptimized sizes="(max-width: 650px) 72vw, (max-width: 960px) 42vw, 25vw" /><i aria-hidden="true">0{index + 1}</i></span>
             <span className="discovery-route-preview-content"><small>{record.category}</small><strong>{record.name}</strong><span><MapPinIcon aria-hidden="true" /> {record.area}<b aria-hidden="true">↙</b></span></span>
           </Link>)}
         </div>

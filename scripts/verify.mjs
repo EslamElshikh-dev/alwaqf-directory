@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import { isPublishable } from '../lib/publish.ts';
 import { normalizeSearch } from '../lib/search.ts';
+import { hasPlaceScene, placeArtSrc } from '../lib/artwork.ts';
 const master = JSON.parse(fs.readFileSync('data/master.json','utf8'));
 const ready = master.records.filter(isPublishable);
 assert.equal(ready.length,125);
@@ -19,11 +20,16 @@ for (const r of ready) {
  const artwork = fs.readFileSync(file,'utf8');
  assert(artwork.includes(r.id), `Artwork identity missing for ${r.id}`);
  artworkHashes.add(createHash('sha256').update(artwork).digest('hex'));
- assert(fs.readFileSync(`.next/server/app/place/${r.id}.html`,'utf8').includes(`/places/${r.id}.svg`), `Artwork missing from detail page ${r.id}`);
+ const selectedArt = placeArtSrc(r.id);
+ assert(fs.existsSync(`public${selectedArt}`), `Missing selected artwork for ${r.id}`);
+ const detail = fs.readFileSync(`.next/server/app/place/${r.id}.html`,'utf8');
+ assert(detail.includes(selectedArt), `Artwork missing from detail page ${r.id}`);
+ if (hasPlaceScene(r.id)) assert(detail.includes('تصور فني · ليس صورة للمكان'), `Scene disclaimer missing for ${r.id}`);
 }
 assert.equal(artworkHashes.size, ready.length, 'Artwork must not repeat between records');
 for(const r of master.records.filter(r=>!isPublishable(r))) {
  assert(!fs.existsSync(`public/places/${r.id}.svg`), `${r.id} has a non-public artwork`);
+ assert(!fs.existsSync(`public/images/places/${r.id}.webp`), `${r.id} has a non-public scene`);
  assert(!sitemap.includes(`/place/${r.id}`));
  assert(!fs.existsSync(`.next/server/app/place/${r.id}.html`));
  for(const f of ['.next/server/app/index.html','.next/server/app/directory.html']) assert(!fs.readFileSync(f,'utf8').includes(r.id),`${r.id} leaked into ${f}`);

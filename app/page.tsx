@@ -8,6 +8,7 @@ import BrandMark from "@/components/BrandMark";
 import AreaScene from "@/components/AreaScene";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
 import { areas, getAreaRecords, getNeighborhoodRecords, getRecord, neighborhoods, publicRecords } from "@/lib/data";
+import { hasPlaceScene, placeArtSrc } from "@/lib/artwork";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
@@ -163,7 +164,7 @@ export default function Home() {
           <div className="spotlight-header"><div><span className="section-kicker">04 / من قلب الدليل</span><h2 id="spotlight-title">أماكن حقيقية.<br /><em>لكل منها ملف.</em></h2></div><p>من المدينة إلى القرى، هذه نماذج من سجلات منشورة. افتح أي ملف لتعرف مكانه وتفاصيله والمصدر الذي استندنا إليه.</p></div>
           <div className="spotlight-gallery">
             {spotlightRecords.map((record, index) => <Link href={`/place/${record.id}`} className={`spotlight-card spotlight-card-${index + 1}`} key={record.id}>
-              <span className="spotlight-image"><Image src={`/places/${record.id}.svg`} alt={`رسم تعبيري لفئة ${record.category}`} fill sizes={index === 0 ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 600px) 38vw, (max-width: 900px) 40vw, 20vw"} /><span>رسم تعبيري</span></span>
+              <span className="spotlight-image"><Image src={placeArtSrc(record.id)} alt={`تصور فني لفئة ${record.category}`} fill unoptimized sizes={index === 0 ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 600px) 38vw, (max-width: 900px) 40vw, 20vw"} /><span>{hasPlaceScene(record.id) ? "تصور فني" : "رسم تعبيري"}</span></span>
               <span className="spotlight-copy"><span className="spotlight-label"><span>{String(index + 1).padStart(2, "0")} / 04</span><span>{record.batch_area}</span></span><span className="spotlight-category">{record.category}</span><strong>{record.name_ar}</strong><span className="spotlight-facts">{record.facts}</span><span className="spotlight-open">استعرض الملف <span aria-hidden="true">↙</span></span></span>
             </Link>)}
           </div>

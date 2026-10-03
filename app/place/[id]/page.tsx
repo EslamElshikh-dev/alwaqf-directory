@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckIcon, MapPinIcon, PhoneIcon } from "@/components/Icons";
 import { areas, getRecord, publicRecords, statusLabel, siteUrl } from "@/lib/data";
+import { placeArtCaption, placeArtSrc } from "@/lib/artwork";
 
 export function generateStaticParams() {
   return publicRecords.map((record) => ({ id: record.id }));
@@ -69,7 +70,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
               </div>
               <div className="place-cover-location"><MapPinIcon /><span>{record.locality}</span>{area ? <Link href={`/areas/${area.slug}`}>استكشف {area.name} <span aria-hidden="true">↙</span></Link> : null}</div>
             </div>
-            <div className="place-cover-visual"><span className="place-visual-orbit" aria-hidden="true"/><div className="place-art-frame"><Image src={`/places/${record.id}.svg`} width={600} height={340} alt={`رسم تعبيري مخصص لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, 50vw" /><span>رسم تعبيري · ليس صورة للمكان</span></div><div className="place-visual-foot"><span>من المكان إلى التفاصيل</span><b>{record.id}</b></div></div>
+            <div className="place-cover-visual"><span className="place-visual-orbit" aria-hidden="true"/><div className="place-art-frame"><Image src={placeArtSrc(record.id)} width={600} height={340} alt={`تصور فني لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, 50vw" /><span>{placeArtCaption(record.id)}</span></div><div className="place-visual-foot"><span>من المكان إلى التفاصيل</span><b>{record.id}</b></div></div>
           </div>
           <div className="place-information">
             <section className="place-information-main" aria-labelledby="place-information-title">
@@ -88,7 +89,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
         {related.length ? <section className="related-section" aria-labelledby="related-title">
           <div className="related-heading"><div><span className="section-kicker">تابع الاستكشاف</span><h2 id="related-title">المزيد في {record.batch_area}</h2></div>{area ? <a href={`/areas/${area.slug}?category=${encodeURIComponent(record.category)}#directory-results`} className="text-link large">كل أنشطة {record.category} <span aria-hidden="true">↙</span></a> : null}</div>
           <div className="related-grid">{related.map((item) => <Link href={`/place/${item.id}`} className="related-card" key={item.id}>
-            <span className="related-art"><Image src={`/places/${item.id}.svg`} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, 33vw" /></span>
+            <span className="related-art"><Image src={placeArtSrc(item.id)} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, 33vw" /></span>
             <span className="related-category">{item.category}</span>
             <strong>{item.name_ar}</strong>
             <span className="related-place"><MapPinIcon /> {item.locality}</span>
