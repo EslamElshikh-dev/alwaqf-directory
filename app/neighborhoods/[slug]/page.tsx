@@ -44,6 +44,16 @@ export default async function NeighborhoodPage({ params }: { params: Promise<{ s
     </div>
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `دليل ${n.name}`, url: `${siteUrl}/neighborhoods/${encodeURIComponent(n.slug)}` }}/>
     {records.length ? <div id="neighborhood-directory"><div className="chapter-directory-heading"><span className="section-kicker">في هذا الحي</span><h2>استكشف الأنشطة والخدمات</h2></div><SearchDirectory records={records}/></div> : <div className="empty-state"><h2>نستكمل بيانات هذه المنطقة</h2><p>لا توجد أنشطة جاهزة للنشر ومرتبطة بهذه المنطقة حاليًا.</p><Link href="/areas/alwaqf" className="primary-button">تصفح خدمات مدينة الوقف</Link></div>}
-    <section className="neighborhood-next" aria-labelledby="neighborhood-next-title"><div className="neighborhood-next-heading"><span className="section-kicker">واصل الرحلة</span><h2 id="neighborhood-next-title">استكشف أحياء أخرى</h2><p>تصفّح بقية المناطق المدرجة في دليل مدينة الوقف.</p></div><div className="neighborhood-next-links">{nextNeighborhoods.map(other => { const otherIndex = neighborhoods.indexOf(other); return <Link href={`/neighborhoods/${encodeURIComponent(other.slug)}`} key={other.slug}><span className="neighborhood-next-number">{String(otherIndex + 1).padStart(2, "0")}</span><strong>{other.name}</strong><span className="neighborhood-next-arrow" aria-hidden="true">↙</span></Link>; })}<Link className="neighborhood-next-all" href="/areas/alwaqf">جميع مناطق المدينة <span aria-hidden="true">↙</span></Link></div></section>
+    <section className="neighborhood-next" aria-labelledby="neighborhood-next-title">
+      <div className="neighborhood-next-heading"><span className="section-kicker">واصل الرحلة · مدينة الوقف</span><h2 id="neighborhood-next-title">من حيّ إلى حيّ.</h2><p>كل صفحة تفتح لك جزءًا آخر من الدليل، بالسجلات الجاهزة للنشر في ذلك الحي.</p><Link className="neighborhood-next-all" href="/areas/alwaqf">جميع مناطق المدينة <span aria-hidden="true">↙</span></Link></div>
+      <div className="neighborhood-next-links">{nextNeighborhoods.map(other => {
+        const otherIndex = neighborhoods.indexOf(other);
+        const count = getNeighborhoodRecords(other.name).length;
+        return <Link className="neighborhood-next-card" href={`/neighborhoods/${encodeURIComponent(other.slug)}`} key={other.slug}>
+          <span className="neighborhood-next-art" aria-hidden="true"><NeighborhoodScene index={otherIndex}/><span className="neighborhood-next-number">{String(otherIndex + 1).padStart(2, "0")}</span></span>
+          <span className="neighborhood-next-card-copy"><span className="neighborhood-next-overline">من أحياء مدينة الوقف</span><strong>{other.name}</strong><span className="neighborhood-next-bottom"><span>{count ? <>سجلات منشورة: <b>{count}</b></> : "قيد إضافة السجلات"}</span><span className="neighborhood-next-arrow" aria-hidden="true">↙</span></span></span>
+        </Link>;
+      })}</div>
+    </section>
   </div></section>;
 }
