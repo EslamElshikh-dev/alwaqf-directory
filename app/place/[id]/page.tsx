@@ -87,13 +87,14 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
         </article>
 
         {related.length ? <section className="related-section" aria-labelledby="related-title">
-          <div className="related-heading"><div><span className="section-kicker">تابع الاستكشاف</span><h2 id="related-title">المزيد في {record.batch_area}</h2></div>{area ? <a href={`/areas/${area.slug}?category=${encodeURIComponent(record.category)}#directory-results`} className="text-link large">كل أنشطة {record.category} <span aria-hidden="true">↙</span></a> : null}</div>
-          <div className="related-grid">{related.map((item) => <Link href={`/place/${item.id}`} className="related-card" key={item.id}>
-            <span className="related-art"><Image src={placeArtSrc(item.id)} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, 33vw" /></span>
-            <span className="related-category">{item.category}</span>
-            <strong>{item.name_ar}</strong>
-            <span className="related-place"><MapPinIcon /> {item.locality}</span>
-            <span className="related-arrow" aria-hidden="true">↙</span>
+          <div className="related-heading"><div><span className="section-kicker">مسارات قريبة · تابع الاستكشاف</span><h2 id="related-title">المزيد في {record.batch_area}</h2><p>أنشطة أخرى من المنطقة نفسها، تبدأ بما يشارك هذا الملف فئته إن وُجد.</p></div>{area ? <a href={`/areas/${area.slug}?category=${encodeURIComponent(record.category)}#directory-results`} className="text-link large">كل أنشطة {record.category} <span aria-hidden="true">↙</span></a> : null}</div>
+          <div className="related-grid">{related.map((item, index) => <Link href={`/place/${item.id}`} className="related-card" key={item.id}>
+            <span className="related-art"><Image src={placeArtSrc(item.id)} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, 33vw" /><span className="related-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span className="related-art-caption">{placeArtCaption(item.id)}</span></span>
+            <span className="related-card-body">
+              <span className="related-card-meta"><span className="related-category">{item.category}</span><span className="related-connection">{item.category === record.category ? "من الفئة نفسها" : "من المنطقة نفسها"}</span></span>
+              <strong>{item.name_ar}</strong>
+              <span className="related-card-foot"><span className="related-place"><MapPinIcon /> {item.locality}</span><span className="related-card-cta">اكتشف النشاط <span className="related-arrow" aria-hidden="true">↙</span></span></span>
+            </span>
           </Link>)}</div>
         </section> : null}
       </div>
