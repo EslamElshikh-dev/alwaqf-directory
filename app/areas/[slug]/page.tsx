@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import AreaScene from "@/components/AreaScene";
 import JsonLd from "@/components/JsonLd";
 import SearchDirectory from "@/components/SearchDirectory";
 import { areas, getAreaRecords, neighborhoods, siteUrl } from "@/lib/data";
@@ -49,7 +48,12 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
         <p>{area.description}</p>
         <div className="area-stats"><span><b>{records.length}</b> سجل جاهز للنشر</span><span><b>{categoryCounts.size}</b> فئة في الدليل</span></div>
       </div>
-      <div className="chapter-visual" aria-hidden="true"><span className="chapter-orbit chapter-orbit-one"/><span className="chapter-orbit chapter-orbit-two"/><span className="chapter-visual-label">مشهد تعبيري من الدليل</span><AreaScene kind={area.slug}/><span className="chapter-folio">{String(areaIndex + 1).padStart(2, "0")} <i>/</i> {String(areas.length).padStart(2, "0")}</span></div>
+      <div className="chapter-visual">
+        <span className="chapter-visual-photo"><Image src={`/images/areas/${area.slug}.webp`} alt={`تصور فني مستوحى من ${area.name}`} fill priority unoptimized sizes="(max-width: 650px) 100vw, 48vw" /></span>
+        <span className="chapter-orbit chapter-orbit-one" aria-hidden="true"/><span className="chapter-orbit chapter-orbit-two" aria-hidden="true"/>
+        <span className="chapter-visual-label">تصور فني · ليس صورة للمكان</span>
+        <span className="chapter-folio" aria-hidden="true">{String(areaIndex + 1).padStart(2, "0")} <i>/</i> {String(areas.length).padStart(2, "0")}</span>
+      </div>
       <div className="chapter-foot"><span>من المركز إلى المكان</span><span>تصفّح الخدمات والأنشطة حسب الفئة <span aria-hidden="true">↙</span></span></div>
     </div>
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: area.name, url: `${siteUrl}/areas/${slug}` }}/>

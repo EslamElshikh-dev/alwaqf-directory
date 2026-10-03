@@ -1132,3 +1132,26 @@ button,input,select{font:inherit}
   .marashda-scene,.marashda-scene img,.marashda-scene-bottom>span{transition:none}
   .marashda-scenes-grid{scroll-behavior:auto}
 }
+
+/* Place portraits are interpretations, clearly identified apart from the directory's sourced records. */
+.area-photo{position:relative;isolation:isolate;display:block;flex:none;width:100%;height:177px;margin:18px 0 10px;overflow:hidden;border:1px solid rgba(255,255,255,.38);border-radius:15px 15px 4px 15px;background:#2b5a4b;box-shadow:0 12px 24px rgba(23,65,43,.12)}
+.area-photo img{object-fit:cover;object-position:center 54%;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.area-photo:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 40%,rgba(9,41,32,.49));pointer-events:none}
+.area-photo>span{position:absolute;z-index:2;right:12px;bottom:11px;padding:5px 10px;border:1px solid rgba(255,255,255,.66);border-radius:30px;background:rgba(10,49,38,.64);color:#fff8e7;font-size:10px;font-weight:800;line-height:1.4;backdrop-filter:blur(8px)}
+.area-card:hover .area-photo img{transform:scale(1.055)}
+.area-card:focus-visible{outline:3px solid #b98a49;outline-offset:4px}
+.chapter-visual-photo{position:absolute;inset:0;z-index:0;display:block;overflow:hidden}
+.chapter-visual-photo img{object-fit:cover;object-position:center 53%}
+.chapter-visual-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,35,29,.37),transparent 40%,rgba(8,37,30,.42));pointer-events:none}
+.chapter-visual .chapter-orbit{z-index:1;opacity:.6}
+.chapter-visual-label{background:rgba(14,57,44,.65);backdrop-filter:blur(8px)}
+@media(max-width:650px){
+  .area-photo{height:172px;margin:15px 0 8px}
+  .chapter-visual-photo img{object-position:center 56%}
+}
+@media(hover:none){
+  .area-card:hover .area-photo img{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .area-photo img{transition:none}
+}

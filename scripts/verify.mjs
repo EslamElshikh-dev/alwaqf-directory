@@ -13,6 +13,14 @@ assert.equal(normalizeSearch('إِسْعَاف'),normalizeSearch('اسعاف'));
 assert.equal(new Set(master.records.map(r=>r.id)).size,master.records.length);
 const sitemap=fs.readFileSync('.next/server/app/sitemap.xml.body','utf8');
 for(const r of ready) assert(sitemap.includes(`/place/${r.id}`));
+const homepage = fs.readFileSync('.next/server/app/index.html','utf8');
+for (const slug of ['alwaqf','almarashda','alqalamina','jazirat-alhamoudi']) {
+ const image = `/images/areas/${slug}.webp`;
+ assert(fs.existsSync(`public${image}`), `Missing area scene for ${slug}`);
+ assert(homepage.includes(image), `Area scene missing from homepage for ${slug}`);
+ const areaPage = fs.readFileSync(`.next/server/app/areas/${slug}.html`,'utf8');
+ assert(areaPage.includes(image) && areaPage.includes('تصور فني · ليس صورة للمكان'), `Area scene or disclaimer missing from ${slug}`);
+}
 const artworkHashes = new Set();
 for (const r of ready) {
  const file = `public/places/${r.id}.svg`;
