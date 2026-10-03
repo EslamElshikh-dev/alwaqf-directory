@@ -42,7 +42,11 @@ export default function DiscoveryRoute({ combinations, areas }: Props) {
         <span className="discovery-route-kicker"><span aria-hidden="true">✦</span> مسارك في الوقف / ٠١</span>
         <h2 id="discovery-route-title">اختر المكان.<br /><em>واكتشف ما فيه.</em></h2>
         <p>خطوتان صغيرتان تختصران الطريق إلى نشاط له اسم وعنوان ومصدر يمكنك مراجعته.</p>
-        <span className="discovery-route-line" aria-hidden="true"><i /><i /><i /></span>
+        <div className="discovery-route-trace" aria-hidden="true">
+          <span className="discovery-route-stop"><i>01</i><span><small>من</small><strong key={area || "all-areas"}>{area || "كل المناطق"}</strong></span></span>
+          <span className="discovery-route-track"><i /></span>
+          <span className="discovery-route-stop"><i>02</i><span><small>إلى</small><strong key={category || "all-categories"}>{category || "كل الأنشطة"}</strong></span></span>
+        </div>
       </div>
 
       <div className="discovery-route-panel">

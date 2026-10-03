@@ -825,9 +825,15 @@ button,input,select{font:inherit}
 .discovery-route-story h2{margin:18px 0 8px;font-size:clamp(27px,2.8vw,37px);line-height:1.34;letter-spacing:-.035em}
 .discovery-route-story h2 em{color:#ebcf95;font-style:normal}
 .discovery-route-story p{max-width:350px;margin:0;color:#c7dacb;font-size:12px;line-height:1.85}
-.discovery-route-line{display:flex;align-items:center;gap:8px;width:72%;margin-top:auto;padding-top:19px;border-bottom:1px dashed rgba(228,211,168,.37)}
-.discovery-route-line i{position:relative;top:4px;width:7px;height:7px;border:1px solid #e8cb91;border-radius:50%;background:#194b3b;box-shadow:0 0 0 4px rgba(232,203,145,.09)}
-.discovery-route-line i:nth-child(2){margin-inline:auto}
+.discovery-route-trace{display:flex;align-items:center;width:100%;min-width:0;margin-top:auto;padding-top:17px}
+.discovery-route-stop{display:flex;align-items:center;gap:9px;min-width:0;max-width:44%}
+.discovery-route-stop>i{display:grid;flex:none;place-items:center;width:25px;height:25px;border:1px solid rgba(237,209,154,.65);border-radius:50%;color:#f5d59a;font:700 9px Arial,sans-serif;font-style:normal;box-shadow:0 0 0 5px rgba(237,209,154,.07)}
+.discovery-route-stop>span{display:grid;min-width:0;gap:1px}
+.discovery-route-stop small{color:#aacaba;font-size:9px;font-weight:600}
+.discovery-route-stop strong{overflow:hidden;color:#f9ebcc;font-size:12px;font-weight:800;text-overflow:ellipsis;white-space:nowrap;animation:route-arrive .32s ease-out both}
+.discovery-route-track{position:relative;flex:1;min-width:18px;height:1px;margin-inline:12px;border-top:1px dashed rgba(238,212,162,.53)}
+.discovery-route-track i{position:absolute;top:-4px;left:50%;width:7px;height:7px;border-radius:50%;background:#e4be79;box-shadow:0 0 0 5px rgba(228,190,121,.11)}
+@keyframes route-arrive{from{opacity:.45;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .discovery-route-panel{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:28px 32px;background:radial-gradient(circle at 3% -16%,rgba(213,188,137,.15),transparent 46%),#fffdf6}
 .discovery-route-fields{display:grid;grid-template-columns:minmax(0,1fr) 23px minmax(0,1fr);gap:13px;align-items:end}
 .discovery-route-field{position:relative;display:grid;min-width:0;gap:9px}
@@ -858,7 +864,7 @@ button,input,select{font:inherit}
   .discovery-route{margin:26px 0 19px;border-radius:18px 18px 5px 18px}
   .discovery-route-story{min-height:231px;padding:24px 25px}
   .discovery-route-story h2{margin-top:14px;font-size:30px}
-  .discovery-route-line{padding-top:16px}
+  .discovery-route-trace{padding-top:15px}
   .discovery-route-panel{padding:22px 21px}
   .discovery-route-fields{grid-template-columns:1fr;gap:15px}
   .discovery-route-connector{display:none}
