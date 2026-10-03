@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { MapPinIcon, SearchIcon } from "./Icons";
 
 export type RouteCombination = { area: string; category: string; count: number };
+export type RoutePreview = { id: string; name: string; area: string; category: string };
 
-type Props = { combinations: RouteCombination[]; areas: string[] };
+type Props = { combinations: RouteCombination[]; areas: string[]; records: RoutePreview[] };
 
 const shortcuts = [
   { href: "#areas", label: "المناطق" },
@@ -15,7 +17,7 @@ const shortcuts = [
   { href: "#neighborhoods", label: "الأحياء" },
 ] as const;
 
-export default function DiscoveryRoute({ combinations, areas }: Props) {
+export default function DiscoveryRoute({ combinations, areas, records }: Props) {
   const [area, setArea] = useState("");
   const [category, setCategory] = useState("");
 
@@ -30,6 +32,23 @@ export default function DiscoveryRoute({ combinations, areas }: Props) {
     ? areas.filter((name) => combinations.some((entry) => entry.area === name && entry.category === category))
     : areas;
   const count = combinations.reduce((total, entry) => total + ((!area || entry.area === area) && (!category || entry.category === category) ? entry.count : 0), 0);
+  const matchingRecords = area || category
+    ? records.filter((record) => (!area || record.area === area) && (!category || record.category === category))
+    : [];
+  const preview: RoutePreview[] = [];
+  const seen = new Set<string>();
+  for (const record of matchingRecords) {
+    const key = category ? record.area : record.category;
+    if (!seen.has(key)) {
+      preview.push(record);
+      seen.add(key);
+      if (preview.length === 3) break;
+    }
+  }
+  for (const record of matchingRecords) {
+    if (preview.length === 3) break;
+    if (!preview.some((item) => item.id === record.id)) preview.push(record);
+  }
 
   const params = new URLSearchParams();
   if (area) params.set("area", area);
@@ -72,6 +91,16 @@ export default function DiscoveryRoute({ combinations, areas }: Props) {
           <Link href={href}>اعرض النتائج <span aria-hidden="true">↙</span></Link>
         </div>
       </div>
+
+      {preview.length > 0 ? <div className="discovery-route-preview" key={`${area}|${category}`}>
+        <div className="discovery-route-preview-head"><div><span>✦ من قلب الدليل</span><h3>أول محطات مسارك</h3></div><p>نظرة على {preview.length} من {count} سجلات جاهزة لهذا الاختيار</p></div>
+        <div className="discovery-route-preview-grid">
+          {preview.map((record, index) => <Link href={`/place/${record.id}`} className="discovery-route-preview-card" key={record.id}>
+            <span className="discovery-route-preview-art"><Image src={`/places/${record.id}.svg`} width={320} height={190} alt="" unoptimized sizes="(max-width: 650px) 72vw, (max-width: 960px) 42vw, 25vw" /><i aria-hidden="true">0{index + 1}</i></span>
+            <span className="discovery-route-preview-content"><small>{record.category}</small><strong>{record.name}</strong><span><MapPinIcon aria-hidden="true" /> {record.area}<b aria-hidden="true">↙</b></span></span>
+          </Link>)}
+        </div>
+      </div> : null}
 
       <nav className="discovery-route-shortcuts" aria-label="طرق أخرى للاستكشاف">
         <span>أو ابدأ بطريقتك</span>

@@ -32,6 +32,12 @@ for (const record of publicRecords) {
   else routeCounts.set(key, { area, category: record.category, count: 1 });
 }
 const routeCombinations = [...routeCounts.values()];
+const routePreviewRecords = publicRecords.map((record) => ({
+  id: record.id,
+  name: record.name_ar,
+  area: record.batch_area || record.locality,
+  category: record.category,
+}));
 
 export default function Home() {
   const categoriesCount = new Set(publicRecords.map((record) => record.category)).size;
@@ -80,7 +86,7 @@ export default function Home() {
             <div><strong>{categoriesCount}</strong><span>فئة متنوعة</span></div>
             <div><strong>{areas.length}</strong><span>مناطق رئيسية</span></div>
           </div>
-          <DiscoveryRoute combinations={routeCombinations} areas={areas.map((area) => area.name)} />
+          <DiscoveryRoute combinations={routeCombinations} areas={areas.map((area) => area.name)} records={routePreviewRecords} />
         </div>
       </section>
 
