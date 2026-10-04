@@ -40,7 +40,7 @@ export default async function LocalityPage({ params }: { params: Promise<{ slug:
         <p>الأنشطة والخدمات المرتبطة بعنوان داخل {n.name}. وجود صفحة للتجمع لا يعني اكتمال حصر أنشطته أو تقرير حدوده الإدارية.</p>
         <div className="area-stats"><span><b>{records.length}</b> {records.length === 1 ? "سجل جاهز للنشر" : "سجلات جاهزة للنشر"}</span></div>
         {records.length > 0 && <a className="neighborhood-jump" href="#locality-directory">تصفح سجلات المكان <span aria-hidden="true">↙</span></a>}
-        <a className="chapter-source" href={n.evidence_url} target="_blank" rel="noreferrer">مصدر تعريف المنطقة <span aria-hidden="true">↗</span></a>
+        <a className="chapter-source" href={n.evidence_url} target="_blank" rel="noreferrer">راجع مصدر اسم المكان <span aria-hidden="true">↗</span></a>
       </div>
       <div className="chapter-visual" aria-hidden="true"><span className="chapter-orbit chapter-orbit-one"/><span className="chapter-orbit chapter-orbit-two"/><span className="chapter-visual-label">رسم تعبيري للتجمع</span><NeighborhoodScene index={index}/><span className="chapter-folio">{String(siblingIndex + 1).padStart(2, "0")} <i>/</i> {String(siblings.length).padStart(2, "0")}</span></div>
       <div className="chapter-foot"><span>{parent.name} <span aria-hidden="true">←</span> {n.name}</span><Link href={`/areas/${parent.slug}`}>اكتشف {parent.name} <span aria-hidden="true">↙</span></Link></div>
@@ -53,7 +53,7 @@ export default async function LocalityPage({ params }: { params: Promise<{ slug:
         const otherIndex = localities.indexOf(other);
         const count = getLocalityRecords(other.name, other.parentArea).length;
         return <Link className="neighborhood-next-card" href={`/localities/${encodeURIComponent(other.slug)}`} key={other.slug}>
-          <span className="neighborhood-next-art" aria-hidden="true"><NeighborhoodScene index={otherIndex}/><span className="neighborhood-next-number">{String(otherIndex + 1).padStart(2, "0")}</span></span>
+          <span className="neighborhood-next-art" aria-hidden="true"><NeighborhoodScene index={otherIndex}/><span className="neighborhood-next-number">{String(siblings.indexOf(other) + 1).padStart(2, "0")}</span></span>
           <span className="neighborhood-next-card-copy"><span className="neighborhood-next-overline">{other.kind} · {parent.name}</span><strong>{other.name}</strong><span className="neighborhood-next-bottom"><span>{count ? <>سجلات منشورة: <b>{count}</b></> : "قيد إضافة السجلات"}</span><span className="neighborhood-next-arrow" aria-hidden="true">↙</span></span></span>
         </Link>;
       })}</div>
