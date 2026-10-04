@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SearchDirectory from "@/components/SearchDirectory";
 import DiscoveryRoute from "@/components/DiscoveryRoute";
+import MethodIllustration from "@/components/MethodIllustration";
 import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
@@ -177,9 +178,9 @@ export default function Home() {
       <section className="section methodology">
         <div className="shell"><div className="section-head methodology-head"><div><span className="section-kicker">كيف نعمل؟</span><h2>الدقة تبدأ قبل النشر.</h2></div><Link href="/about" className="text-link large">اقرأ منهج الدليل <span aria-hidden="true">↙</span></Link></div>
           <div className="methodology-grid">
-            <div className="method-card"><div className="method-top"><span className="method-icon"><SearchIcon /></span><span className="method-step">01 / نجمع</span></div><h3>معلومة لها أصل</h3><p>نبدأ بمصادر قابلة للمراجعة، من الجهات الرسمية إلى الأدلة والخرائط المحلية.</p><span className="method-foot">البداية · المصدر</span></div>
-            <div className="method-card"><div className="method-top"><span className="method-icon"><MapPinIcon /></span><span className="method-step">02 / نراجع</span></div><h3>عنوان في مكانه</h3><p>نطابق الأسماء والعناوين والهواتف، ونفصل التكرار والتعارض قبل العرض.</p><span className="method-foot">الوسط · المطابقة</span></div>
-            <div className="method-card"><div className="method-top"><span className="method-icon"><CheckIcon /></span><span className="method-step">03 / ننشر</span></div><h3>الجاهز فقط</h3><p>تظهر السجلات المكتملة، وتبقى البيانات التي تحتاج تحققًا إضافيًا خارج الدليل العام.</p><span className="method-foot">النتيجة · دليل موثوق</span></div>
+            <div className="method-card"><div className="method-visual"><span className="method-step"><b>01</b> نجمع</span><MethodIllustration kind="source" /><span className="method-visual-label">أثر المعلومة</span></div><div className="method-content"><h3>معلومة لها أصل</h3><p>نبدأ بمصادر قابلة للمراجعة، من الجهات الرسمية إلى الأدلة والخرائط المحلية.</p><span className="method-foot">البداية · المصدر <span aria-hidden="true">✦</span></span></div></div>
+            <div className="method-card"><div className="method-visual"><span className="method-step"><b>02</b> نراجع</span><MethodIllustration kind="location" /><span className="method-visual-label">موضع العنوان</span></div><div className="method-content"><h3>عنوان في مكانه</h3><p>نطابق الأسماء والعناوين والهواتف، ونفصل التكرار والتعارض قبل العرض.</p><span className="method-foot">الوسط · المطابقة <span aria-hidden="true">✦</span></span></div></div>
+            <div className="method-card"><div className="method-visual"><span className="method-step"><b>03</b> ننشر</span><MethodIllustration kind="publish" /><span className="method-visual-label">ختم الجاهز</span></div><div className="method-content"><h3>الجاهز فقط</h3><p>تظهر السجلات المكتملة، وتبقى البيانات التي تحتاج تحققًا إضافيًا خارج الدليل العام.</p><span className="method-foot">النتيجة · دليل موثوق <span aria-hidden="true">✦</span></span></div></div>
           </div>
         </div>
       </section>
