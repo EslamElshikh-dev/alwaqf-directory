@@ -38,6 +38,7 @@ for (const r of ready) {
 }
 assert.equal(artworkHashes.size, ready.length, 'Artwork must not repeat between records');
 const marashdaPage = fs.readFileSync('.next/server/app/areas/almarashda.html','utf8');
+assert(!marashdaPage.includes('2 سجلان منشوران'), 'Category counts should use grammatical Arabic singular and dual labels');
 for (const id of ['MR-001','MR-002','MR-003','MR-004','MR-005','MR-006','MR-007','MR-009']) {
  assert(ready.some(r=>r.id===id), `${id} must be public before featuring it`);
  assert(marashdaPage.includes(`/place/${id}`) && marashdaPage.includes(`/images/places/${id}.webp`), `${id} missing from the Al-Marashda visual route`);
