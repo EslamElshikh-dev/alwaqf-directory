@@ -7,13 +7,13 @@ import MethodIllustration from "@/components/MethodIllustration";
 import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
-import { areas, getAreaRecords, getNeighborhoodRecords, getRecord, neighborhoods, publicRecords } from "@/lib/data";
+import { areas, cityLocalities, getAreaRecords, getLocalityRecords, getRecord, localities, publicRecords, ruralLocalities } from "@/lib/data";
 import { hasPlaceScene, placeArtSrc } from "@/lib/artwork";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 const areaCounts = Object.fromEntries(areas.map((area) => [area.slug, getAreaRecords(area.slug).length]));
-const neighborhoodCounts = Object.fromEntries(neighborhoods.map((neighborhood) => [neighborhood.slug, getNeighborhoodRecords(neighborhood.name).length]));
+const localityCounts = Object.fromEntries(localities.map((locality) => [locality.slug, getLocalityRecords(locality.name, locality.parentArea).length]));
 const featuredPaths = [
   { category: "صيدلية", kind: "pharmacy", eyebrow: "الصحة اليومية", description: "صيدليات منشورة بمصادرها في قرى ومناطق الوقف." },
   { category: "سوبرماركت", kind: "market", eyebrow: "احتياجات البيت", description: "أماكن تسوّق محلية تجدها باسمها ومنطقتها." },
@@ -51,7 +51,7 @@ export default function Home() {
             <div className="hero-copy">
               <span className="eyebrow"><span className="eyebrow-dot" /> دليل محلي من قلب قنا</span>
               <h1>الوقف على<br /><em>خريطة واحدة.</em></h1>
-              <p>أماكن تعرفها، وخدمات تحتاجها، ومصادر تقدر ترجع لها. اكتشف مدينة الوقف وقراها وأحياءها من دليل مرتب وواضح.</p>
+              <p>أماكن تعرفها، وخدمات تحتاجها، ومصادر تقدر ترجع لها. اكتشف مدينة الوقف وقراها ونجوعها وعزبها من دليل مرتب وواضح.</p>
               <div className="hero-actions">
                 <Link href="/directory" className="primary-button"><SearchIcon /> ابحث عن خدمة <ArrowIcon /></Link>
                 <a href="#areas" className="ghost-button">تصفح المناطق <ArrowIcon /></a>
@@ -133,31 +133,38 @@ export default function Home() {
 
       <section className="section search-section" id="search">
         <div className="shell">
-          <div className="section-head"><div><span className="section-kicker">02 / الدليل</span><h2>تدور على إيه<br />في الوقف؟</h2></div><p>ابحث بالاسم أو نوع الخدمة أو الحي، ثم ضيّق النتائج حسب الفئة والمنطقة. كل نتيجة هنا لها مصدر يمكن مراجعته.</p></div>
+          <div className="section-head"><div><span className="section-kicker">02 / الدليل</span><h2>تدور على إيه<br />في الوقف؟</h2></div><p>ابحث بالاسم أو نوع الخدمة أو القرية أو النجع، ثم ضيّق النتائج حسب الفئة والمنطقة. كل نتيجة هنا لها مصدر يمكن مراجعته.</p></div>
           <SearchDirectory records={publicRecords} compact />
         </div>
       </section>
 
-      <section className="section neighborhoods-section" id="neighborhoods">
+      <section className="section neighborhoods-section" id="localities">
         <div className="shell split-feature">
-          <div className="neighborhood-copy"><span className="section-kicker">03 / الأحياء</span><h2>كل حي له<br />مكان على الدليل.</h2><p>نربط النشاط بالحي حين يؤكد عنوانه أو مصدره ذلك. تصفح الدندراوية، السنابسة، المداكير وغيرها من التجمعات داخل مدينة الوقف.</p><Link href="/areas/alwaqf" className="text-link large">استكشف أحياء مدينة الوقف <span aria-hidden="true">↙</span></Link></div>
+          <div className="neighborhood-copy"><span className="section-kicker">03 / التجمعات</span><h2>منطقة أو نجع،<br />كل مكان باسمه.</h2><p>في المدينة مناطق وتجمعات، وفي القرى نجوع وعزب. نربط المكان بالقرية الأم حين يثبت عنوانه، لتصل للخدمات الأقرب إليك دون افتراض صفة إدارية لا نملك دليلها.</p><Link href="/areas/almarashda" className="text-link large">استكشف قرى المركز <span aria-hidden="true">↙</span></Link></div>
           <div className="neighborhood-board">
-            <div className="board-title"><span>أحياء مدينة الوقف</span><span>دليل المناطق / {neighborhoods.length}</span></div>
+            <div className="board-title"><span>فهرس التجمعات</span><span>مناطق ونجوع وعزب / {localities.length}</span></div>
             <div className="board-overview">
-              <div className="board-overview-copy"><span>فهرس المكان</span><strong>قريب منك،<br />حيًا بحي.</strong></div>
-              <span className="board-total"><b>{neighborhoods.length}</b><small>أحياء وتجمعات</small></span>
+              <div className="board-overview-copy"><span>فهرس المكان</span><strong>من المدينة،<br />إلى قلب النجع.</strong></div>
+              <span className="board-total"><b>{localities.length}</b><small>تجمعًا موثقًا</small></span>
               <svg viewBox="0 0 520 150" fill="none" aria-hidden="true" className="board-route"><path d="M-20 105C63 102 86 37 162 55S248 158 330 105 435 9 545 38" stroke="currentColor" strokeWidth="2" strokeDasharray="5 8"/><circle cx="81" cy="75" r="7"/><circle cx="246" cy="109" r="7"/><circle cx="402" cy="55" r="7"/></svg>
             </div>
-            <div className="neighborhood-cloud">{neighborhoods.map((neighborhood, index) => {
-              const count = neighborhoodCounts[neighborhood.slug];
-              return <Link href={`/neighborhoods/${neighborhood.slug}`} key={neighborhood.name}>
-                <span className="board-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="board-name">{neighborhood.name}</span>
-                <span className="board-count">{count ? `${count} سجل` : "قيد الإضافة"}</span>
-                <span className="board-arrow" aria-hidden="true">↙</span>
-              </Link>;
-            })}</div>
-            <div className="board-footer"><span className="board-footer-dot" /> العدد يعكس السجلات الجاهزة للنشر في كل حي</div>
+            {[
+              {title: "مناطق مدينة الوقف وتجمعاتها", items: cityLocalities},
+              {title: "نجوع وعزب القرى", items: ruralLocalities},
+            ].map(group => <div className="locality-group" key={group.title}>
+              <h3 className="locality-group-label">{group.title}<span>{group.items.length.toLocaleString("ar-EG")}</span></h3>
+              <div className="neighborhood-cloud">{group.items.map((locality, index) => {
+                const count = localityCounts[locality.slug];
+                const parent = areas.find(area => area.slug === locality.parentArea);
+                return <Link href={`/localities/${encodeURIComponent(locality.slug)}`} key={locality.slug}>
+                  <span className="board-index">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="board-name">{locality.name}<small>{parent?.name}</small></span>
+                  <span className="board-count">{count ? `${count} سجل` : "قيد الإضافة"}</span>
+                  <span className="board-arrow" aria-hidden="true">↙</span>
+                </Link>;
+              })}</div>
+            </div>)}
+            <div className="board-footer"><span className="board-footer-dot" /> العدد يعكس السجلات الجاهزة للنشر لكل تجمع، وتبعيته هنا عنوانية وليست تصنيفًا إداريًا</div>
           </div>
         </div>
       </section>

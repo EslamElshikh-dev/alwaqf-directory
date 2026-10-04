@@ -15,7 +15,7 @@ import { siteUrl } from "@/lib/data";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "دليل الوقف | دليل الأنشطة والخدمات في الوقف قنا", template: "%s | دليل الوقف" },
-  description: "دليل محلي منظم لخدمات وأنشطة مركز الوقف بمحافظة قنا: مدينة الوقف، المراشدة، القلمينا، جزيرة الحمودي والأحياء المحلية.",
+  description: "دليل محلي منظم لخدمات ومعالم وأنشطة مركز الوقف بمحافظة قنا: المدينة وقرى المراشدة والقلمينا وجزيرة الحمودي ونجوعها وعزبها.",
   openGraph: { title: "دليل الوقف", description: "اكتشف الخدمات والأنشطة المحلية في مركز الوقف بمحافظة قنا.", type: "website", locale: "ar_EG", url: siteUrl, siteName: "دليل الوقف" },
   twitter: { card: "summary_large_image", title: "دليل الوقف", description: "دليل محلي موثّق لمركز الوقف بمحافظة قنا" },
   icons: { icon: "/logo.svg" },

@@ -56,7 +56,7 @@ export default function SearchDirectory({ records, compact = false }: Props) {
   return (
     <div className="directory-module" id="directory-results">
       <div className="search-panel">
-        <label className="search-field"><span>ابحث في الدليل</span><span className="field-control"><SearchIcon /><input type="search" value={query} onChange={e=>{setQuery(e.target.value); setVisibleCount(PAGE_SIZE);}} placeholder="اسم نشاط، خدمة، شارع أو حي…" /></span></label>
+        <label className="search-field"><span>ابحث في الدليل</span><span className="field-control"><SearchIcon /><input type="search" value={query} onChange={e=>{setQuery(e.target.value); setVisibleCount(PAGE_SIZE);}} placeholder="نشاط، خدمة، قرية أو نجع…" /></span></label>
         <label className="filter-field"><span>الفئة</span><select value={category} onChange={e=>{setCategory(e.target.value); setVisibleCount(PAGE_SIZE);}}>{categories.map(item => <option key={item}>{item}</option>)}</select></label>
         <label className="filter-field"><span>المنطقة</span><select value={area} onChange={e=>{setArea(e.target.value); setVisibleCount(PAGE_SIZE);}}>{areas.map(item => <option key={item}>{item}</option>)}</select></label>
       </div>

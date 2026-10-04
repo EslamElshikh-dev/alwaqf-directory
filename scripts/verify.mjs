@@ -6,7 +6,7 @@ import { normalizeSearch } from '../lib/search.ts';
 import { hasPlaceScene, placeArtSrc } from '../lib/artwork.ts';
 const master = JSON.parse(fs.readFileSync('data/master.json','utf8'));
 const ready = master.records.filter(isPublishable);
-assert.equal(ready.length,125);
+assert.equal(ready.length,134);
 for(const status of ['research_hold','verify_conflict','closed_ready_with_caution','unknown']) assert.equal(isPublishable({status,publish_ready:true}),false);
 assert.equal(isPublishable({status:'closed_ready',publish_ready:false}),false);
 assert.equal(normalizeSearch('إِسْعَاف'),normalizeSearch('اسعاف'));
@@ -14,6 +14,8 @@ assert.equal(new Set(master.records.map(r=>r.id)).size,master.records.length);
 const sitemap=fs.readFileSync('.next/server/app/sitemap.xml.body','utf8');
 for(const r of ready) assert(sitemap.includes(`/place/${r.id}`));
 const homepage = fs.readFileSync('.next/server/app/index.html','utf8');
+assert(!homepage.includes('الأحياء') && !homepage.includes('حيًا بحي'), 'The homepage still labels localities as neighborhoods');
+assert(homepage.includes('نجوع وعزب القرى'), 'Rural localities must be visible from the homepage');
 for (const slug of ['alwaqf','almarashda','alqalamina','jazirat-alhamoudi']) {
  const image = `/images/areas/${slug}.webp`;
  assert(fs.existsSync(`public${image}`), `Missing area scene for ${slug}`);
@@ -46,7 +48,7 @@ for(const r of master.records.filter(r=>!isPublishable(r))) {
  assert(!fs.existsSync(`public/images/places/${r.id}.webp`), `${r.id} has a non-public scene`);
  assert(!sitemap.includes(`/place/${r.id}`));
  assert(!fs.existsSync(`.next/server/app/place/${r.id}.html`));
- for(const f of ['.next/server/app/index.html','.next/server/app/directory.html','.next/server/app/areas/almarashda.html']) assert(!fs.readFileSync(f,'utf8').includes(r.id),`${r.id} leaked into ${f}`);
+ for(const f of ['.next/server/app/index.html','.next/server/app/directory.html','.next/server/app/areas/almarashda.html', ...fs.readdirSync('.next/server/app/localities',{recursive:true}).filter(f=>f.endsWith('.html')).map(f=>`.next/server/app/localities/${f}`)]) assert(!fs.readFileSync(f,'utf8').includes(r.id),`${r.id} leaked into ${f}`);
 }
 for(const f of fs.readdirSync('.next/static/chunks').filter(f=>f.endsWith('.js'))){
  const js=fs.readFileSync(`.next/static/chunks/${f}`,'utf8');
@@ -54,7 +56,9 @@ for(const f of fs.readdirSync('.next/static/chunks').filter(f=>f.endsWith('.js')
 }
 console.log(`PASS: ${ready.length} public records and unique illustrations; ${master.records.length-ready.length} excluded from pages, artwork, payloads, sitemap and client bundles; strict publication gate; normalized Arabic search.`);
 
-for (const [name, ids] of Object.entries({"عزبة-وشاحي":["WK-045","WK-052"],"رنة-البهايجة":["WK-067","WK-068","WK-069"]})) {
- const html=fs.readFileSync(`.next/server/app/neighborhoods/${name}.html`,"utf8");
+for (const [name, ids] of Object.entries({"عزبة-وشاحي":["WK-045","WK-052"],"رنة-البهايجة":["WK-067","WK-068","WK-069"],"عزبة-علام":["MR-010"],"نجع-الجنينة":["MR-058"],"نجع-العرب-والنجاجرة":["MR-049","MR-056"],"عزبة-داوود":["QL-015"]})) {
+ const html=fs.readFileSync(`.next/server/app/localities/${name}.html`,"utf8");
  for (const id of ids) assert(html.includes(`/place/${id}`),`${id} missing from ${name}`);
+ assert(sitemap.includes(`/localities/${encodeURIComponent(name)}`),`${name} missing from sitemap`);
 }
+assert(!sitemap.includes('/neighborhoods/'), 'Legacy locality paths must not enter the sitemap');

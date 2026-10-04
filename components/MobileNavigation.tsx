@@ -21,7 +21,7 @@ export default function MobileNavigation() {
     };
   }, [pathname]);
   const current = pathname === "/about" ? "about"
-    : pathname.startsWith("/areas/") || pathname.startsWith("/neighborhoods/") || (pathname === "/" && (hash === "#areas" || hash === "#neighborhoods")) ? "areas"
+    : pathname.startsWith("/areas/") || pathname.startsWith("/localities/") || pathname.startsWith("/neighborhoods/") || (pathname === "/" && (hash === "#areas" || hash === "#localities")) ? "areas"
     : pathname === "/directory" || pathname.startsWith("/place/") ? "directory"
     : "home";
 

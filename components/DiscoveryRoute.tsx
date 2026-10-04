@@ -15,7 +15,7 @@ const shortcuts = [
   { href: "#areas", label: "المناطق" },
   { href: "#paths", label: "مسارات الخدمة" },
   { href: "#search", label: "البحث الحر" },
-  { href: "#neighborhoods", label: "الأحياء" },
+  { href: "#localities", label: "النجوع والعزب" },
 ] as const;
 
 export default function DiscoveryRoute({ combinations, areas, records }: Props) {
