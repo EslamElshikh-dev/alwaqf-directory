@@ -1233,3 +1233,54 @@ button,input,select{font:inherit}
   .neighborhood-next-card:hover{transform:none;box-shadow:0 7px 20px rgba(23,65,44,.06)}
   .neighborhood-next-card:hover .neighborhood-scene,.neighborhood-next-card:hover .neighborhood-next-arrow{transform:none}
 }
+
+/* Five distinct editorial portraits make the directory navigable by place. */
+.directory-gallery{position:relative;margin:0 0 44px;padding:27px 27px 29px;border:1px solid #d7e2d4;border-radius:23px 23px 5px 23px;background:radial-gradient(circle at 1% 110%,rgba(175,204,168,.2),transparent 36%),#f3f5ec;box-shadow:0 14px 37px rgba(26,70,44,.055)}
+.directory-gallery:before{content:"";position:absolute;top:-1px;right:28px;width:83px;height:3px;background:#c69f62}
+.directory-gallery-heading{display:flex;align-items:end;justify-content:space-between;gap:27px;margin-bottom:20px}
+.directory-gallery-heading h2{margin:5px 0 0;font-size:clamp(28px,3.4vw,43px);line-height:1.35;letter-spacing:-.04em}
+.directory-gallery-heading h2 em{color:#2e8064;font-style:normal}
+.directory-gallery-heading p{max-width:415px;margin:0 0 4px;color:#657b6e;font-size:13px;line-height:1.9}
+.directory-gallery-track{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px}
+.directory-gallery-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid #cbdacf;border-radius:15px 15px 15px 3px;background:#fffdf6;color:#173f32;box-shadow:0 6px 16px rgba(21,65,41,.055);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s}
+.directory-gallery-card:hover{transform:translateY(-5px);border-color:#78a98b;box-shadow:0 17px 30px rgba(16,61,39,.14)}
+.directory-gallery-card:focus-visible{outline:3px solid #bc9154;outline-offset:3px}
+.directory-gallery-photo{position:relative;display:block;aspect-ratio:1.4;overflow:hidden;background:#dfe8da}
+.directory-gallery-photo:after{content:"";position:absolute;inset:48% 0 0;background:linear-gradient(transparent,rgba(10,43,34,.5));pointer-events:none}
+.directory-gallery-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.directory-gallery-card:hover img{transform:scale(1.06)}
+.directory-gallery-number{position:absolute;z-index:1;top:10px;right:10px;display:grid;place-items:center;width:32px;height:32px;border:1px solid rgba(255,255,255,.65);border-radius:10px 10px 10px 2px;background:rgba(18,68,52,.82);color:#f6d394;font-family:Arial,sans-serif;font-size:11px;font-weight:800;direction:ltr;backdrop-filter:blur(6px)}
+.directory-gallery-disclaimer{position:absolute;z-index:1;left:10px;bottom:9px;color:#fff9e8;font-size:10px;font-weight:800;text-shadow:0 2px 8px #123c31}
+.directory-gallery-copy{position:relative;display:flex;flex:1;flex-direction:column;gap:6px;min-height:126px;padding:14px 14px 15px}
+.directory-gallery-copy small{color:#5d816e;font-size:10px;font-weight:800;line-height:1.55}
+.directory-gallery-copy small span{color:#b99a61}
+.directory-gallery-copy strong{padding-left:18px;font-size:15px;line-height:1.55;text-wrap:balance}
+.directory-gallery-arrow{position:absolute;bottom:13px;left:12px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#e5f1e6;color:#17634b;font-size:15px;transition:transform .25s,background .25s}
+.directory-gallery-card:hover .directory-gallery-arrow{transform:translate(-3px,3px);background:#cfe7d4}
+.record-art:after{content:"";position:absolute;inset:58% 0 0;background:linear-gradient(transparent,rgba(13,48,38,.43));pointer-events:none}
+.record-art>span{z-index:1}
+.record-art .record-art-caption{left:10px;bottom:10px}
+.record-art .record-art-place{right:10px;left:auto;bottom:10px;max-width:55%;overflow:hidden;border-color:rgba(255,255,255,.43);background:rgba(18,67,52,.79);color:#fffdf1;text-overflow:ellipsis;white-space:nowrap}
+.directory-page .record-art-index{z-index:2}
+@media(max-width:960px){
+  .directory-gallery-heading{align-items:start;flex-direction:column;gap:5px}
+  .directory-gallery-heading p{max-width:650px}
+  .directory-gallery-track{display:flex;gap:11px;overflow-x:auto;padding-bottom:12px;scroll-padding-inline:3px;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:#9ab7a1 transparent}
+  .directory-gallery-card{flex:0 0 min(36vw,275px);scroll-snap-align:start}
+}
+@media(max-width:650px){
+  .directory-gallery{margin:0 -12px 35px;padding:23px 0 16px;border-radius:20px 20px 5px 20px}
+  .directory-gallery:before{right:20px}
+  .directory-gallery-heading{padding-inline:19px;margin-bottom:15px}
+  .directory-gallery-heading h2{font-size:29px}
+  .directory-gallery-heading p{font-size:12px}
+  .directory-gallery-track{padding-inline:19px;scroll-padding-inline:19px}
+  .directory-gallery-card{flex-basis:min(75vw,290px)}
+  .directory-gallery-copy{min-height:117px}
+  .directory-gallery-card:hover{transform:none;box-shadow:0 6px 16px rgba(21,65,41,.055)}
+  .directory-gallery-card:hover img{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .directory-gallery-card,.directory-gallery-photo img,.directory-gallery-arrow{transition:none}
+  .directory-gallery-track{scroll-behavior:auto}
+}

@@ -75,7 +75,7 @@ export default function SearchDirectory({ records, compact = false, localityOpti
       <div className="records-grid">
         {visible.map((record, index) => (
           <article className="record-card" key={record.id}>
-            <Link href={`/place/${record.id}`} className="record-art" aria-label={`عرض ${record.name_ar}`}><Image src={placeArtSrc(record.id)} width={600} height={340} alt={`تصور فني لفئة ${record.category}`} unoptimized sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw" />{!compact ? <span className="record-art-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span> : null}<span>{hasPlaceScene(record.id) ? "تصور فني" : "رسم تعبيري"}</span></Link>
+            <Link href={`/place/${record.id}`} className="record-art" aria-label={`عرض ${record.name_ar}`}><Image src={placeArtSrc(record.id)} width={600} height={340} alt="" unoptimized sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw" />{!compact ? <span className="record-art-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span> : null}<span className="record-art-caption">{hasPlaceScene(record.id) ? "تصور فني" : "رسم تعبيري"}</span><span className="record-art-place">{record.batch_area}</span></Link>
             <div className="record-body">
               <div className="record-top"><span className="category-chip">{record.category}</span><span className="verified"><CheckIcon /> له مصدر</span></div>
               <h3><Link href={`/place/${record.id}`}>{record.name_ar}</Link></h3>
