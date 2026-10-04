@@ -5,16 +5,16 @@
     "governorate": "قنا",
     "strategy": "المراشدة كنواة أولى ثم القلمينا وجزيرة الحمودي ثم مدينة الوقف ومناطقها",
     "data_policy": "لا ينشر أي سجل متعارض أو قديم الاتصال قبل تحقق ثانٍ",
-    "phase": "Phase 7 — rural localities and documented public services",
-    "last_batch": "MR-058..MR-059; QL-016..QL-017; CH-017; WK-073..WK-075",
-    "record_count": 168,
+    "phase": "Phase 8 — documented localities and public landmarks",
+    "last_batch": "WK-076..WK-077; five named locality pages and one sourced mandara",
+    "record_count": 170,
     "active_batches": [
       "المراشدة",
       "القلمينا",
       "جزيرة الحمودي",
       "مدينة الوقف"
     ],
-    "next_batch": "تثبيت تبعية النجوع والعزب ميدانيًا + مراجعة الخدمات خارج القرى الرئيسية"
+    "next_batch": "تثبيت تبعية المواضع الأخرى ميدانيًا ومراجعة السجلات المعلقة قبل إتاحتها"
   },
   "places": [
     {
@@ -127,7 +127,8 @@
       "parent": "المراشدة / مركز الوقف",
       "status": "confirmed_locality",
       "evidence": "وردت في سجل تجاري رسمي حديث كعنوان داخل قرية المراشدة.",
-      "notes": "تحتاج مطابقة خريطة وحدود محلية."
+      "notes": "تحتاج مطابقة خريطة وحدود محلية.",
+      "source_url": "https://www.itda.gov.eg/CRM/883/CRA119.pdf"
     },
     {
       "id": "PL-015",
@@ -1912,8 +1913,8 @@
       "confidence": "A",
       "facts": "مدرسة مذكورة كمقر انتخابي رسمي في بندر الوقف.",
       "phone_or_code": null,
-      "source_url": "https://www.google.com/maps/search/?api=1&query=%D9%85%D8%AF%D8%B1%D8%B3%D8%A9%20%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%A8%D8%A7%D9%84%D8%A8%D8%AF%D8%B1%D8%A7%D9%88%D9%8A%D8%A9%20%D9%85%D8%AF%D9%8A%D9%86%D8%A9%20%D8%A7%D9%84%D9%88%D9%82%D9%81%D8%8C%20%D9%85%D8%B1%D9%83%D8%B2%20%D8%A7%D9%84%D9%88%D9%82%D9%81%D8%8C%20%D9%82%D9%86%D8%A7%D8%8C%20%D9%85%D8%B5%D8%B1",
-      "notes": "نحتاج مصدر تعليم لتحديد المرحلة بدقة قبل إضافة وسم ابتدائي/إعدادي.",
+      "source_url": "https://www.elections.eg/images/pdfs/qrar-tashkel/30%20%202023.pdf",
+      "notes": "قرار رسمي يذكر المدرسة ببندر الوقف؛ المرحلة التعليمية التفصيلية تحتاج تثبيتًا.",
       "publish_ready": true,
       "neighborhood_canonical": "البدراوية",
       "batch_area": "مدينة الوقف"
@@ -3157,6 +3158,40 @@
       "notes": "الزيارة الحديثة تؤكد المؤسسة؛ موقعها التفصيلي يحتاج مصدرًا مباشرًا قبل ربطها بمنطقة داخل المدينة.",
       "publish_ready": true,
       "neighborhood_canonical": "غير محدد",
+      "batch_area": "مدينة الوقف"
+    },
+    {
+      "id": "WK-076",
+      "name_ar": "مركز شباب مدينة الوقف",
+      "category": "شباب ورياضة",
+      "locality": "مدينة الوقف",
+      "markaz": "الوقف",
+      "governorate": "قنا",
+      "status": "closed_ready",
+      "confidence": "A/B",
+      "facts": "شهد مركز شباب مدينة الوقف ورشًا لمشروع المبادرات المجتمعية في أبريل 2026 ضمن أنشطة مديرية الشباب والرياضة بقنا.",
+      "phone_or_code": null,
+      "source_url": "https://alahramaldawly.com/2026/04/26/261774/",
+      "notes": "يثبت الخبر الحديث نشاط المركز، دون تحديد موقعه الدقيق داخل المدينة أو ساعات عمله؛ لا يُخلط مع مركز شباب المراشدة أو القلمينا.",
+      "publish_ready": true,
+      "neighborhood_canonical": "غير محدد",
+      "batch_area": "مدينة الوقف"
+    },
+    {
+      "id": "WK-077",
+      "name_ar": "مسجد فجر الإسلام",
+      "category": "مسجد",
+      "locality": "الوقف الجديدة",
+      "markaz": "الوقف",
+      "governorate": "قنا",
+      "status": "closed_ready",
+      "confidence": "A/B",
+      "facts": "ورد المسجد علامة مكانية لساحة مدينة الوقف الجديدة في قائمة ساحات عيد الأضحى لعام 2025 المعتمدة من مديرية أوقاف قنا.",
+      "phone_or_code": null,
+      "source_url": "https://gate.ahram.org.eg/News/5184355.aspx",
+      "notes": "يثبت المصدر اسم المسجد والمنطقة فقط؛ قائمة ساحات 2025 لا تعني استمرار ترتيبات صلاة العيد في الأعوام التالية.",
+      "publish_ready": true,
+      "neighborhood_canonical": "الوقف الجديدة",
       "batch_area": "مدينة الوقف"
     }
   ],

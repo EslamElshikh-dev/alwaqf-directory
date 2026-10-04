@@ -7,7 +7,7 @@ import MethodIllustration from "@/components/MethodIllustration";
 import CategorySymbol from "@/components/CategorySymbol";
 import BrandMark from "@/components/BrandMark";
 import { ArrowIcon, CheckIcon, MapPinIcon, SearchIcon } from "@/components/Icons";
-import { areas, cityLocalities, getAreaRecords, getLocalityRecords, getRecord, localities, publicRecords, ruralLocalities } from "@/lib/data";
+import { areas, cityLocalities, getAreaRecords, getLocalityRecords, getRecord, getSearchableLocalityOptions, localities, publicRecords, ruralLocalities } from "@/lib/data";
 import { hasPlaceScene, placeArtSrc } from "@/lib/artwork";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -134,13 +134,13 @@ export default function Home() {
       <section className="section search-section" id="search">
         <div className="shell">
           <div className="section-head"><div><span className="section-kicker">02 / الدليل</span><h2>تدور على إيه<br />في الوقف؟</h2></div><p>ابحث بالاسم أو نوع الخدمة أو القرية أو النجع، ثم ضيّق النتائج حسب الفئة والمنطقة. كل نتيجة هنا لها مصدر يمكن مراجعته.</p></div>
-          <SearchDirectory records={publicRecords} compact />
+          <SearchDirectory records={publicRecords} localityOptions={getSearchableLocalityOptions(publicRecords)} compact />
         </div>
       </section>
 
       <section className="section neighborhoods-section" id="localities">
         <div className="shell split-feature">
-          <div className="neighborhood-copy"><span className="section-kicker">03 / التجمعات</span><h2>منطقة أو نجع،<br />كل مكان باسمه.</h2><p>في المدينة مناطق وتجمعات، وفي القرى نجوع وعزب. نربط المكان بالقرية الأم حين يثبت عنوانه، لتصل للخدمات الأقرب إليك دون افتراض صفة إدارية لا نملك دليلها.</p><Link href="/areas/almarashda" className="text-link large">استكشف قرى المركز <span aria-hidden="true">↙</span></Link></div>
+          <div className="neighborhood-copy"><span className="section-kicker">03 / التجمعات</span><h2>منطقة أو نجع،<br />كل مكان باسمه.</h2><p>في المدينة مناطق وتجمعات، وفي القرى نجوع وعزب ومواضع محلية. نربط المكان بالقرية الأم حين يثبت عنوانه، لتصل للخدمات الأقرب إليك دون افتراض صفة إدارية لا نملك دليلها.</p><Link href="/areas/almarashda" className="text-link large">استكشف قرى المركز <span aria-hidden="true">↙</span></Link></div>
           <div className="neighborhood-board">
             <div className="board-title"><span>فهرس التجمعات</span><span>مناطق ونجوع وعزب / {localities.length}</span></div>
             <div className="board-overview">
@@ -150,7 +150,7 @@ export default function Home() {
             </div>
             {[
               {title: "مناطق مدينة الوقف وتجمعاتها", items: cityLocalities},
-              {title: "نجوع وعزب القرى", items: ruralLocalities},
+              {title: "نجوع وعزب ومواضع القرى", items: ruralLocalities},
             ].map(group => <div className="locality-group" key={group.title}>
               <h3 className="locality-group-label">{group.title}<span>{group.items.length.toLocaleString("ar-EG")}</span></h3>
               <div className="neighborhood-cloud">{group.items.map((locality, index) => {

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import NeighborhoodScene from "@/components/NeighborhoodScene";
 import SearchDirectory from "@/components/SearchDirectory";
 import JsonLd from "@/components/JsonLd";
-import { areas, localities, getLocalityRecords, siteUrl } from "@/lib/data";
+import { areas, localities, getLocalityRecords, getSearchableLocalityOptions, siteUrl } from "@/lib/data";
 export function generateStaticParams() {
   return localities.map(n => ({ slug: n.slug }));
 }
@@ -46,7 +46,7 @@ export default async function LocalityPage({ params }: { params: Promise<{ slug:
       <div className="chapter-foot"><span>{parent.name} <span aria-hidden="true">←</span> {n.name}</span><Link href={`/areas/${parent.slug}`}>اكتشف {parent.name} <span aria-hidden="true">↙</span></Link></div>
     </div>
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `دليل ${n.name}`, url: `${siteUrl}/localities/${encodeURIComponent(n.slug)}`, isPartOf: {"@type": "Place", name: parent.name} }}/>
-    {records.length ? <div id="locality-directory"><div className="chapter-directory-heading"><span className="section-kicker">في {n.name}</span><h2>استكشف الأنشطة والخدمات</h2></div><SearchDirectory records={records}/></div> : <div className="empty-state"><h2>نستكمل بيانات هذا المكان</h2><p>لا توجد أنشطة جاهزة للنشر ومرتبطة بهذا التجمع حاليًا.</p><Link href={`/areas/${parent.slug}`} className="primary-button">تصفح خدمات {parent.name}</Link></div>}
+    {records.length ? <div id="locality-directory"><div className="chapter-directory-heading"><span className="section-kicker">في {n.name}</span><h2>استكشف الأنشطة والخدمات</h2></div><SearchDirectory records={records} localityOptions={getSearchableLocalityOptions(records)}/></div> : <div className="empty-state"><h2>نستكمل بيانات هذا المكان</h2><p>لا توجد أنشطة جاهزة للنشر ومرتبطة بهذا التجمع حاليًا.</p><Link href={`/areas/${parent.slug}`} className="primary-button">تصفح خدمات {parent.name}</Link></div>}
     <section className="neighborhood-next" aria-labelledby="neighborhood-next-title">
       <div className="neighborhood-next-heading"><span className="section-kicker">واصل الرحلة · {parent.name}</span><h2 id="neighborhood-next-title">مكان يقودك إلى مكان.</h2><p>استكشف التجمعات الأخرى والسجلات المرتبطة بعنوان واضح داخل {parent.name}.</p><Link className="neighborhood-next-all" href={`/areas/${parent.slug}`}>كل سجلات {parent.name} <span aria-hidden="true">↙</span></Link></div>
       <div className="neighborhood-next-links">{nextLocalities.map(other => {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SearchDirectory from "@/components/SearchDirectory";
 import { SearchIcon } from "@/components/Icons";
-import { areas, getAreaRecords, publicRecords } from "@/lib/data";
+import { areas, getAreaRecords, getSearchableLocalityOptions, publicRecords } from "@/lib/data";
 
 export const metadata: Metadata = { title: "دليل الأنشطة والخدمات", description: "ابحث في الأنشطة والخدمات الموثقة داخل مركز الوقف بمحافظة قنا.", alternates: { canonical: "/directory" } };
 
@@ -22,7 +22,7 @@ export default function DirectoryPage() {
       </div>
       <div className="directory-atlas"><div className="directory-atlas-head"><span>فهرس المكان</span><span>الوقف · قنا / ٠١</span></div><p>ابدأ من منطقة تعرفها</p><nav className="atlas-route-grid" aria-label="مناطق الدليل">{areas.map((area, index) => <Link href={`/areas/${area.slug}`} className={`atlas-route atlas-route-${index + 1}`} key={area.slug}><span className="atlas-route-index">{String(index + 1).padStart(2, "0")} / 04</span><strong>{area.name}</strong><span className="atlas-route-foot"><span><b>{getAreaRecords(area.slug).length}</b> سجل جاهز</span><span aria-hidden="true">↙</span></span></Link>)}</nav><span className="atlas-compass" aria-hidden="true">✦</span><div className="directory-atlas-foot"><span>اختر منطقة، أو ابحث في الدليل كله</span><span>رسم فهرسي تعبيري</span></div></div>
     </div>
-    <div className="directory-search-heading"><div><span className="section-kicker">الآن دورك</span><h2>ابحث بطريقتك.</h2></div><p>اكتب كلمة، ثم ضيّق النتائج بالفئة والمنطقة. تظهر هنا السجلات المكتملة والجاهزة للنشر فقط.</p></div>
-    <SearchDirectory records={publicRecords} />
+    <div className="directory-search-heading"><div><span className="section-kicker">الآن دورك</span><h2>ابحث بطريقتك.</h2></div><p>اكتب كلمة، ثم ضيّق النتائج بالفئة أو القرية أو التجمع المحلي. تظهر هنا السجلات المكتملة والجاهزة للنشر فقط.</p></div>
+    <SearchDirectory records={publicRecords} localityOptions={getSearchableLocalityOptions(publicRecords)} />
   </div></section>;
 }

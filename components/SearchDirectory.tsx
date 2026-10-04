@@ -8,13 +8,15 @@ import { CheckIcon, MapPinIcon, PhoneIcon, SearchIcon } from "@/components/Icons
 import type { DirectoryRecord } from "@/lib/data";
 import { hasPlaceScene, placeArtSrc } from "@/lib/artwork";
 
-type Props = { records: DirectoryRecord[]; compact?: boolean };
+type Props = { records: DirectoryRecord[]; compact?: boolean; localityOptions?: {name: string; recordIds: string[]}[] };
 const PAGE_SIZE = 12;
+const EMPTY_LOCALITY_OPTIONS: {name: string; recordIds: string[]}[] = [];
 
-export default function SearchDirectory({ records, compact = false }: Props) {
+export default function SearchDirectory({ records, compact = false, localityOptions = EMPTY_LOCALITY_OPTIONS }: Props) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("الكل");
   const [area, setArea] = useState("الكل");
+  const [locality, setLocality] = useState("الكل");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const categories = useMemo(() => ["الكل", ...Array.from(new Set(records.map(r => r.category))).sort((a,b)=>a.localeCompare(b,"ar"))], [records]);
@@ -26,8 +28,11 @@ export default function SearchDirectory({ records, compact = false }: Props) {
     const selectedArea = params.get("area");
     if (selectedCategory && categories.includes(selectedCategory)) setCategory(selectedCategory);
     if (selectedArea && areas.includes(selectedArea)) setArea(selectedArea);
+    const selectedLocality = params.get("locality");
+    if (selectedLocality && localityOptions.some(item => item.name === selectedLocality)) setLocality(selectedLocality);
     setQuery(params.get("q")?.slice(0, 120) || "");
-  }, [compact, categories, areas]);
+  }, [compact, categories, areas, localityOptions]);
+  const visibleLocalities = useMemo(() => localityOptions.filter(option => option.recordIds.some(id => records.some(record => record.id === id && (area === "الكل" || record.batch_area === area)))), [localityOptions, records, area]);
   const quickCategories = useMemo(() => {
     const counts = new Map<string, number>();
     for (const record of records) counts.set(record.category, (counts.get(record.category) || 0) + 1);
@@ -39,11 +44,12 @@ export default function SearchDirectory({ records, compact = false }: Props) {
     return records.filter(record => {
       if (category !== "الكل" && record.category !== category) return false;
       if (area !== "الكل" && (record.batch_area || record.locality) !== area) return false;
+      if (locality !== "الكل" && !localityOptions.find(option => option.name === locality)?.recordIds.includes(record.id)) return false;
       if (!q) return true;
       const haystack = normalizeSearch(`${record.name_ar} ${record.category} ${record.locality} ${record.batch_area} ${record.facts} ${record.neighborhood_canonical || ""}`);
       return haystack.includes(q);
     });
-  }, [records, query, category, area]);
+  }, [records, query, category, area, locality, localityOptions]);
 
   const visible = compact ? filtered.slice(0, 8) : filtered.slice(0, visibleCount);
   const remaining = filtered.length - visible.length;
@@ -51,6 +57,7 @@ export default function SearchDirectory({ records, compact = false }: Props) {
   if (query.trim()) fullParams.set("q", query.trim());
   if (category !== "الكل") fullParams.set("category", category);
   if (area !== "الكل") fullParams.set("area", area);
+  if (locality !== "الكل") fullParams.set("locality", locality);
   const fullHref = fullParams.size ? `/directory?${fullParams}` : "/directory";
 
   return (
@@ -58,10 +65,11 @@ export default function SearchDirectory({ records, compact = false }: Props) {
       <div className="search-panel">
         <label className="search-field"><span>ابحث في الدليل</span><span className="field-control"><SearchIcon /><input type="search" value={query} onChange={e=>{setQuery(e.target.value); setVisibleCount(PAGE_SIZE);}} placeholder="نشاط، خدمة، قرية أو نجع…" /></span></label>
         <label className="filter-field"><span>الفئة</span><select value={category} onChange={e=>{setCategory(e.target.value); setVisibleCount(PAGE_SIZE);}}>{categories.map(item => <option key={item}>{item}</option>)}</select></label>
-        <label className="filter-field"><span>المنطقة</span><select value={area} onChange={e=>{setArea(e.target.value); setVisibleCount(PAGE_SIZE);}}>{areas.map(item => <option key={item}>{item}</option>)}</select></label>
+        <label className="filter-field"><span>المنطقة</span><select value={area} onChange={e=>{setArea(e.target.value); setLocality("الكل"); setVisibleCount(PAGE_SIZE);}}>{areas.map(item => <option key={item}>{item}</option>)}</select></label>
+        {localityOptions.length ? <label className="filter-field"><span>التجمع المحلي</span><select value={locality} onChange={e=>{setLocality(e.target.value); setVisibleCount(PAGE_SIZE);}}><option>الكل</option>{visibleLocalities.map(item => <option key={item.name}>{item.name}</option>)}</select></label> : null}
       </div>
       {records.length > 12 ? <div className="quick-filters" role="group" aria-label="فئات الدليل"><span>فئات في الدليل</span><div className="quick-filters-list">{quickCategories.map(([name, count]) => <button type="button" key={name} aria-pressed={category === name} onClick={() => {setCategory(category === name ? "الكل" : name); setVisibleCount(PAGE_SIZE);}}>{name}<small>{count}</small></button>)}</div></div> : null}
-      <div className="results-line" role="status" aria-live="polite"><span><b>{filtered.length}</b> نتيجة مطابقة</span><button className="reset-filters" onClick={() => {setQuery(""); setCategory("الكل"); setArea("الكل"); setVisibleCount(PAGE_SIZE);}}>مسح البحث والفلاتر</button></div>
+      <div className="results-line" role="status" aria-live="polite"><span><b>{filtered.length}</b> نتيجة مطابقة</span><button className="reset-filters" onClick={() => {setQuery(""); setCategory("الكل"); setArea("الكل"); setLocality("الكل"); setVisibleCount(PAGE_SIZE);}}>مسح البحث والفلاتر</button></div>
       <div className="records-grid">
         {visible.map((record, index) => (
           <article className="record-card" key={record.id}>
