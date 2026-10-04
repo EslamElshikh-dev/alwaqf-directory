@@ -70,10 +70,10 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
         <p>خدمات وأماكن من الدليل في مشاهد مصممة لكل فئة. افتح أي بطاقة لتصل إلى ملفها ومصدرها.</p>
       </div>
       <nav className="area-scenes-grid" data-count={areaScenes.length} aria-label={`ملفات مصوّرة من ${area.name}`}>
-        {areaScenes.map((record, index) => <Link href={`/place/${record.id}`} className={`area-scene area-scene-${index + 1}`} key={record.id}>
+        {areaScenes.map((record, index) => <Link href={`/place/${record.id}`} className={`area-portrait area-portrait-${index + 1}`} key={record.id}>
           <Image src={placeArtSrc(record.id)} alt="" fill unoptimized sizes="(max-width: 700px) 76vw, (max-width: 900px) 50vw, 25vw" />
-          <span className="area-scene-top"><span>{String(index + 1).padStart(2, "0")} / {String(areaScenes.length).padStart(2, "0")}</span><span>{record.category}</span></span>
-          <span className="area-scene-bottom"><strong>{record.name_ar}</strong><span aria-hidden="true">↙</span></span>
+          <span className="area-portrait-top"><span>{String(index + 1).padStart(2, "0")} / {String(areaScenes.length).padStart(2, "0")}</span><span>{record.category}</span></span>
+          <span className="area-portrait-bottom"><strong>{record.name_ar}</strong><span aria-hidden="true">↙</span></span>
         </Link>)}
       </nav>
       <div className="area-scenes-foot"><span>الصور تصورات فنية للفئات، وليست صورًا توثيقية للمنشآت.</span><span className="area-scenes-swipe">مرّر لاستكشاف المشاهد <span aria-hidden="true">←</span></span></div>
