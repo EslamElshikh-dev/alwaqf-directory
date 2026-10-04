@@ -142,7 +142,7 @@ export default function Home() {
         <div className="shell split-feature">
           <div className="neighborhood-copy"><span className="section-kicker">03 / التجمعات</span><h2>منطقة أو نجع،<br />كل مكان باسمه.</h2><p>في المدينة مناطق وتجمعات، وفي القرى نجوع وعزب ومواضع محلية. نربط المكان بالقرية الأم حين يثبت عنوانه، لتصل للخدمات الأقرب إليك دون افتراض صفة إدارية لا نملك دليلها.</p><Link href="/areas/almarashda" className="text-link large">استكشف قرى المركز <span aria-hidden="true">↙</span></Link></div>
           <div className="neighborhood-board">
-            <div className="board-title"><span>فهرس التجمعات</span><span>مناطق ونجوع وعزب / {localities.length}</span></div>
+            <div className="board-title"><span>فهرس التجمعات</span><span>مناطق ونجوع وعزب ومواضع / {localities.length}</span></div>
             <div className="board-overview">
               <div className="board-overview-copy"><span>فهرس المكان</span><strong>من المدينة،<br />إلى قلب النجع.</strong></div>
               <span className="board-total"><b>{localities.length}</b><small>تجمعًا موثقًا</small></span>

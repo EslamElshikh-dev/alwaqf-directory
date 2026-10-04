@@ -8,9 +8,10 @@ import { CheckIcon, MapPinIcon, PhoneIcon, SearchIcon } from "@/components/Icons
 import type { DirectoryRecord } from "@/lib/data";
 import { hasPlaceScene, placeArtSrc } from "@/lib/artwork";
 
-type Props = { records: DirectoryRecord[]; compact?: boolean; localityOptions?: {name: string; recordIds: string[]}[] };
+type LocalityOption = {name: string; recordIds: string[]; aliases?: readonly string[]};
+type Props = { records: DirectoryRecord[]; compact?: boolean; localityOptions?: LocalityOption[] };
 const PAGE_SIZE = 12;
-const EMPTY_LOCALITY_OPTIONS: {name: string; recordIds: string[]}[] = [];
+const EMPTY_LOCALITY_OPTIONS: LocalityOption[] = [];
 
 export default function SearchDirectory({ records, compact = false, localityOptions = EMPTY_LOCALITY_OPTIONS }: Props) {
   const [query, setQuery] = useState("");
@@ -46,7 +47,8 @@ export default function SearchDirectory({ records, compact = false, localityOpti
       if (area !== "الكل" && (record.batch_area || record.locality) !== area) return false;
       if (locality !== "الكل" && !localityOptions.find(option => option.name === locality)?.recordIds.includes(record.id)) return false;
       if (!q) return true;
-      const haystack = normalizeSearch(`${record.name_ar} ${record.category} ${record.locality} ${record.batch_area} ${record.facts} ${record.neighborhood_canonical || ""}`);
+      const aliases = localityOptions.filter(option => option.recordIds.includes(record.id)).flatMap(option => option.aliases || []);
+      const haystack = normalizeSearch(`${record.name_ar} ${record.category} ${record.locality} ${record.batch_area} ${record.facts} ${record.neighborhood_canonical || ""} ${aliases.join(" ")}`);
       return haystack.includes(q);
     });
   }, [records, query, category, area, locality, localityOptions]);

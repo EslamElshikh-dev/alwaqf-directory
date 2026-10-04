@@ -6,7 +6,7 @@ import { normalizeSearch } from '../lib/search.ts';
 import { hasPlaceScene, placeArtSrc } from '../lib/artwork.ts';
 const master = JSON.parse(fs.readFileSync('data/master.json','utf8'));
 const ready = master.records.filter(isPublishable);
-assert.equal(ready.length,136);
+assert.equal(ready.length,137);
 for(const status of ['research_hold','verify_conflict','closed_ready_with_caution','unknown']) assert.equal(isPublishable({status,publish_ready:true}),false);
 assert.equal(isPublishable({status:'closed_ready',publish_ready:false}),false);
 assert.equal(normalizeSearch('إِسْعَاف'),normalizeSearch('اسعاف'));
@@ -57,11 +57,14 @@ for(const f of fs.readdirSync('.next/static/chunks').filter(f=>f.endsWith('.js')
 }
 console.log(`PASS: ${ready.length} public records and unique illustrations; ${master.records.length-ready.length} excluded from pages, artwork, payloads, sitemap and client bundles; strict publication gate; normalized Arabic search.`);
 
-for (const [name, ids] of Object.entries({"عزبة-وشاحي":["WK-045","WK-052"],"رنة-البهايجة":["WK-067","WK-068","WK-069"],"عزبة-علام":["MR-010"],"نجع-الجنينة":["MR-058"],"نجع-العرب-والنجاجرة":["MR-049","MR-056"],"عزبة-داوود":["QL-015"],"كوبري-عبادي":["MR-050"],"البدراوية":["WK-007"],"الشابورة":["WK-011"],"المشتل":["WK-005"],"الوقف-الجديدة":["WK-022","WK-042","WK-077"]})) {
+for (const [name, ids] of Object.entries({"عزبة-وشاحي":["WK-045","WK-052"],"رنة-البهايجة":["WK-067","WK-068","WK-069"],"عزبة-علام":["MR-010"],"نجع-الجنينة":["MR-058"],"نجع-العرب-والنجاجرة":["MR-049","MR-056"],"عزبة-داوود":["QL-015"],"كوبري-عبادي":["MR-050"],"البدراوية":["WK-007"],"الشابورة":["WK-011"],"المشتل":["WK-005"],"الوقف-الجديدة":["WK-022","WK-042","WK-077","WK-078"]})) {
  const html=fs.readFileSync(`.next/server/app/localities/${name}.html`,"utf8");
  for (const id of ids) assert(html.includes(`/place/${id}`),`${id} missing from ${name}`);
  assert(sitemap.includes(`/localities/${encodeURIComponent(name)}`),`${name} missing from sitemap`);
 }
+const newWaqf = fs.readFileSync('.next/server/app/localities/الوقف-الجديدة.html','utf8');
+assert(newWaqf.includes('ورد أيضًا:') && newWaqf.includes('حاجر الجبل') && newWaqf.includes('News/5581748.aspx'), 'The sourced locality name must be shown without duplicating its page');
+assert.equal(master.project.record_count, master.records.length);
 const mandara = fs.readFileSync('.next/server/app/localities/مندرة-الفولي.html','utf8');
 assert(mandara.includes('لا توجد أنشطة جاهزة للنشر') && mandara.includes('www.itda.gov.eg/CRM/883/CRA119.pdf'));
 assert(sitemap.includes('/localities/%D9%85%D9%86%D8%AF%D8%B1%D8%A9-%D8%A7%D9%84%D9%81%D9%88%D9%84%D9%8A'));

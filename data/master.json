@@ -5,9 +5,9 @@
     "governorate": "قنا",
     "strategy": "المراشدة كنواة أولى ثم القلمينا وجزيرة الحمودي ثم مدينة الوقف ومناطقها",
     "data_policy": "لا ينشر أي سجل متعارض أو قديم الاتصال قبل تحقق ثانٍ",
-    "phase": "Phase 8 — documented localities and public landmarks",
-    "last_batch": "WK-076..WK-077; five named locality pages and one sourced mandara",
-    "record_count": 170,
+    "phase": "Phase 9 — sourced speech service and locality naming",
+    "last_batch": "WK-078; documented حاجر الجبل as a name for الوقف الجديدة with a contemporary source",
+    "record_count": 171,
     "active_batches": [
       "المراشدة",
       "القلمينا",
@@ -57,7 +57,10 @@
       "name_ar": "حاجر الجبل",
       "type": "area",
       "parent": "مدينة الوقف",
-      "status": "confirmed_area"
+      "status": "confirmed_area",
+      "evidence": "ورد اسم حاجر الجبل في تغطية نقل سيارة الإسعاف إلى مدينة الوقف الجديدة (حاجر الجبل) ثم عودتها إلى مستشفى الوقف في مارس 2026.",
+      "source_url": "https://gate.ahram.org.eg/News/5581748.aspx",
+      "notes": "اسم موضع في نطاق الوقف الجديدة؛ يربط باسم المنطقة في البحث بدل إنشاء صفحة تجمع مكررة."
     },
     {
       "id": "PL-007",
@@ -226,8 +229,9 @@
       "type": "new town / area",
       "parent": "مركز الوقف",
       "status": "confirmed_area",
-      "evidence": "تظهر في مصادر حديثة وخرائط Google، كما ارتبطت بمقر إسعاف سابق قبل عودته للمستشفى في مارس 2026.",
-      "notes": "تعامل كمنطقة مستقلة عن قلب المدينة عند الفلاتر."
+      "evidence": "وردت التسمية صراحة مع حاجر الجبل بين قوسين في خبر عن موقع الإسعاف السابق، مارس 2026.",
+      "notes": "يُستخدم حاجر الجبل اسمًا محليًا مرتبطًا بالوقف الجديدة. لا يعني توثيق الاسم رسم حدود إدارية للمنطقة.",
+      "source_url": "https://gate.ahram.org.eg/News/5581748.aspx"
     },
     {
       "id": "PL-027",
@@ -3190,6 +3194,23 @@
       "phone_or_code": null,
       "source_url": "https://gate.ahram.org.eg/News/5184355.aspx",
       "notes": "يثبت المصدر اسم المسجد والمنطقة فقط؛ قائمة ساحات 2025 لا تعني استمرار ترتيبات صلاة العيد في الأعوام التالية.",
+      "publish_ready": true,
+      "neighborhood_canonical": "الوقف الجديدة",
+      "batch_area": "مدينة الوقف"
+    },
+    {
+      "id": "WK-078",
+      "name_ar": "مركز التخاطب بمركز شباب الوقف",
+      "category": "تخاطب وتأهيل",
+      "locality": "حاجر الجبل - الوقف الجديدة",
+      "markaz": "الوقف",
+      "governorate": "قنا",
+      "status": "closed_ready",
+      "confidence": "A/B",
+      "facts": "افتتح في مايو 2026 داخل مركز شباب الوقف بمنطقة حاجر الجبل، بحضور مسؤولين من محافظة قنا ومديرية الشباب والرياضة؛ أُعلن تقديم خدمات للأطفال في مجال النطق والتخاطب والتأهيل.",
+      "phone_or_code": null,
+      "source_url": "https://alahramaldawly.com/2026/05/05/262217/",
+      "notes": "تغطية الافتتاح توثق الموقع والخدمة في تاريخ النشر؛ لا تُثبت ساعات العمل أو الرسوم أو توافر المواعيد حاليًا. خبر الأهرام 20 مارس 2026 يورد مدينة الوقف الجديدة (حاجر الجبل). الخدمة داخل مركز الشباب وليست عنوانًا مستقلاً مفترضًا.",
       "publish_ready": true,
       "neighborhood_canonical": "الوقف الجديدة",
       "batch_area": "مدينة الوقف"

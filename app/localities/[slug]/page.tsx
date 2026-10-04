@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!n) return {};
   return {
     title: `دليل ${n.name}`,
-    description: `استكشف الخدمات والأنشطة المرتبطة بعنوان في ${n.name} بمركز الوقف، قنا، ومصادرها.`,
+    description: `استكشف الخدمات والأنشطة المرتبطة بعنوان في ${n.name}${n.aliases?.length ? `، المعروفة أيضًا باسم ${n.aliases.join("، ")}` : ""} بمركز الوقف، قنا، ومصادرها.`,
     alternates: { canonical: `/localities/${encodeURIComponent(n.slug)}` },
   };
 }
@@ -37,6 +37,7 @@ export default async function LocalityPage({ params }: { params: Promise<{ slug:
         <span className="chapter-overline"><span className="chapter-sigil" aria-hidden="true">✦</span> دليل مركز الوقف <span aria-hidden="true">/</span> {parent.name}</span>
         <span className="section-kicker">{n.kind} · {parent.name}</span>
         <h1>{n.name}</h1>
+        {n.aliases?.length ? <a className="locality-alias" href={n.aliasEvidenceUrl} target="_blank" rel="noreferrer"><span aria-hidden="true">⌁</span> ورد أيضًا: {n.aliases.join("، ")} <span aria-hidden="true">↗</span></a> : null}
         <p>الأنشطة والخدمات المرتبطة بعنوان داخل {n.name}. وجود صفحة للتجمع لا يعني اكتمال حصر أنشطته أو تقرير حدوده الإدارية.</p>
         <div className="area-stats"><span><b>{records.length}</b> {records.length === 1 ? "سجل جاهز للنشر" : "سجلات جاهزة للنشر"}</span></div>
         {records.length > 0 && <a className="neighborhood-jump" href="#locality-directory">تصفح سجلات المكان <span aria-hidden="true">↙</span></a>}

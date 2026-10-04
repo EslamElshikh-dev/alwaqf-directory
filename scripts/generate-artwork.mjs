@@ -12,6 +12,7 @@ fs.mkdirSync(output, { recursive: true });
 const symbols = {
   pharmacy: '<rect x="30" y="30" width="60" height="67" rx="11"/><path d="M43 30v-8h34v8M60 45v37M42 64h36"/><path d="M41 97h38"/>',
   medical: '<path d="M28 37h64v59H28zM40 37V25h40v12M60 52v29M46 66h28"/><path d="M37 96h46"/>',
+  speech: '<path d="M22 25h76v49H71L53 92V74H22V25Z"/><path d="M36 43h48M36 56h29"/><path d="M29 99c8-10 19-13 31-13s23 3 31 13"/>',
   dental: '<path d="M33 29c10-7 18-2 27 0 9-2 17-7 27 0 10 8 3 24 0 34-3 12-6 35-17 35-8 0-5-22-10-22s-2 22-10 22c-11 0-14-23-17-35-3-10-10-26 0-34Z"/>',
   school: '<path d="m20 48 40-22 40 22v49H20zM30 48h60M44 60h12v14H44zM64 60h12v14H64zM53 97V82h14v15M60 26V16m0 0h16"/>',
   library: '<path d="M25 35q17-7 35 4 18-11 35-4v57q-18-6-35 6-17-12-35-6zM60 39v59M33 46q10-3 19 2m-19 9q10-2 19 2m16-11q10-5 19-2m-19 13q10-4 19-2"/>',
@@ -87,6 +88,7 @@ const subjects = {
 };
 
 function kind(category) {
+  if (/تخاطب|تأهيل/.test(category)) return 'speech';
   if (/صيدلية/.test(category)) return 'pharmacy';
   if (/أسنان/.test(category)) return 'dental';
   if (/مستشفى|صحة|طبي/.test(category)) return 'medical';
