@@ -6,7 +6,7 @@ import { normalizeSearch } from '../lib/search.ts';
 import { hasPlaceScene, placeArtSrc } from '../lib/artwork.ts';
 const master = JSON.parse(fs.readFileSync('data/master.json','utf8'));
 const ready = master.records.filter(isPublishable);
-assert.equal(ready.length,137);
+assert.equal(ready.length,138);
 for(const status of ['research_hold','verify_conflict','closed_ready_with_caution','unknown']) assert.equal(isPublishable({status,publish_ready:true}),false);
 assert.equal(isPublishable({status:'closed_ready',publish_ready:false}),false);
 assert.equal(normalizeSearch('إِسْعَاف'),normalizeSearch('اسعاف'));

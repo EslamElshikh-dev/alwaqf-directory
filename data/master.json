@@ -5,9 +5,9 @@
     "governorate": "قنا",
     "strategy": "المراشدة كنواة أولى ثم القلمينا وجزيرة الحمودي ثم مدينة الوقف ومناطقها",
     "data_policy": "لا ينشر أي سجل متعارض أو قديم الاتصال قبل تحقق ثانٍ",
-    "phase": "Phase 9 — sourced speech service and locality naming",
-    "last_batch": "WK-078; documented حاجر الجبل as a name for الوقف الجديدة with a contemporary source",
-    "record_count": 171,
+    "phase": "Phase 9 — sourced services and village school expansion",
+    "last_batch": "WK-078 and MR-060; حاجر الجبل alias for الوقف الجديدة",
+    "record_count": 172,
     "active_batches": [
       "المراشدة",
       "القلمينا",
@@ -3214,6 +3214,23 @@
       "publish_ready": true,
       "neighborhood_canonical": "الوقف الجديدة",
       "batch_area": "مدينة الوقف"
+    },
+    {
+      "id": "MR-060",
+      "name_ar": "مدرسة عمر بن الخطاب الابتدائية المشتركة بالمراشدة",
+      "category": "تعليم ابتدائي",
+      "locality": "المراشدة",
+      "markaz": "الوقف",
+      "governorate": "قنا",
+      "status": "closed_ready",
+      "confidence": "A/B",
+      "facts": "مدرسة ابتدائية مشتركة بالمراشدة زارها وكيل وزارة التربية والتعليم بقنا ضمن جولة بمدارس إدارة الوقف في ديسمبر 2024.",
+      "phone_or_code": null,
+      "source_url": "https://www.khalfelhadth.com/28591",
+      "notes": "تغطية جولة وكيل الوزارة في ديسمبر 2024 تسمي المدرسة والشعلة بالمراشدة؛ يذكر تقرير الشارع القنائي 2021 مبنى عمر بن الخطاب وتلاميذه ضمن خطة صيانة مدارس القرية. لا نثبت عنوان شارع أو هاتف.",
+      "publish_ready": true,
+      "neighborhood_canonical": null,
+      "batch_area": "المراشدة"
     }
   ],
   "data_quality": [
