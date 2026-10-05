@@ -12,6 +12,14 @@ type LocalityOption = {name: string; recordIds: string[]; aliases?: readonly str
 type Props = { records: DirectoryRecord[]; compact?: boolean; localityOptions?: LocalityOption[] };
 const PAGE_SIZE = 12;
 const EMPTY_LOCALITY_OPTIONS: LocalityOption[] = [];
+const categoryArtwork: Record<string, string> = {
+  "مسجد": "mosque",
+  "تعليم ابتدائي": "primary",
+  "سوبرماركت": "market",
+  "صيدلية": "pharmacy",
+  "مخبز": "bakery",
+  "تعليم إعدادي": "preparatory",
+};
 
 export default function SearchDirectory({ records, compact = false, localityOptions = EMPTY_LOCALITY_OPTIONS }: Props) {
   const [query, setQuery] = useState("");
@@ -39,6 +47,7 @@ export default function SearchDirectory({ records, compact = false, localityOpti
     for (const record of records) counts.set(record.category, (counts.get(record.category) || 0) + 1);
     return [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ar")).slice(0, 6);
   }, [records]);
+  const visualCategories = !compact && records.length > 100 && quickCategories.every(([name]) => Boolean(categoryArtwork[name]));
 
   const filtered = useMemo(() => {
     const q = normalizeSearch(query);
@@ -70,7 +79,13 @@ export default function SearchDirectory({ records, compact = false, localityOpti
         <label className="filter-field"><span>المنطقة</span><select value={area} onChange={e=>{setArea(e.target.value); setLocality("الكل"); setVisibleCount(PAGE_SIZE);}}>{areas.map(item => <option key={item}>{item}</option>)}</select></label>
         {localityOptions.length ? <label className="filter-field"><span>التجمع المحلي</span><select value={locality} onChange={e=>{setLocality(e.target.value); setVisibleCount(PAGE_SIZE);}}><option>الكل</option>{visibleLocalities.map(item => <option key={item.name}>{item.name}</option>)}</select></label> : null}
       </div>
-      {records.length > 12 ? <div className="quick-filters" role="group" aria-label="فئات الدليل"><span>فئات في الدليل</span><div className="quick-filters-list">{quickCategories.map(([name, count]) => <button type="button" key={name} aria-pressed={category === name} onClick={() => {setCategory(category === name ? "الكل" : name); setVisibleCount(PAGE_SIZE);}}>{name}<small>{count}</small></button>)}</div></div> : null}
+      {records.length > 12 ? <div className={`quick-filters${visualCategories ? " quick-filters-visual" : ""}`} role="group" aria-label="فئات الدليل">
+        {visualCategories ? <div className="visual-filters-heading"><div><span className="eyebrow">اختر ما تبحث عنه</span><strong>محطات من يومك في الوقف</strong></div><span className="visual-filters-hint">اسحب لتستكشف الفئات <span aria-hidden="true">←</span></span></div> : <span>فئات في الدليل</span>}
+        <div className="quick-filters-list">{quickCategories.map(([name, count]) => <button type="button" key={name} aria-pressed={category === name} onClick={() => {setCategory(category === name ? "الكل" : name); setVisibleCount(PAGE_SIZE);}}>
+          {visualCategories ? <span className="visual-filter-image"><Image src={`/images/filters/${categoryArtwork[name]}.webp`} fill alt="" unoptimized sizes="(max-width: 650px) 50vw, 16vw" /><span className="visual-filter-art-label">رسم تعبيري</span></span> : null}
+          <span className="visual-filter-name">{name}<small>{count}</small></span>
+        </button>)}</div>
+      </div> : null}
       <div className="results-line" role="status" aria-live="polite"><span><b>{filtered.length}</b> نتيجة مطابقة</span><button className="reset-filters" onClick={() => {setQuery(""); setCategory("الكل"); setArea("الكل"); setLocality("الكل"); setVisibleCount(PAGE_SIZE);}}>مسح البحث والفلاتر</button></div>
       <div className="records-grid">
         {visible.map((record, index) => (
