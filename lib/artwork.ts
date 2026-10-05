@@ -3,6 +3,7 @@ const sceneIds = new Set([
   "MR-005", "MR-006", "MR-007", "MR-009",
   "MR-060", "WK-001", "WK-078", "QL-001", "CH-006",
   "WK-023", "WK-074", "QL-002", "QL-013", "CH-003", "CH-004",
+  "WK-015", "WK-044", "MR-035", "MR-055", "QL-003", "CH-013",
 ]);
 
 export function hasPlaceScene(id: string) {
